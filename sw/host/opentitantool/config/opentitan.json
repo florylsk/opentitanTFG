@@ -1,0 +1,35 @@
+{
+  "pins": [
+    {
+      "name": "RESET",
+      "mode": "OpenDrain",
+      "level": true,
+      "pull_mode": "PullUp"
+    },
+    {
+      "name": "BOOTSTRAP",
+      "mode": "PushPull",
+      "level": false,
+      "pull_mode": "None"
+    }
+  ],
+  "strappings": [
+    {
+      "name": "RomBootstrap",
+      "pins": [
+        {
+          "name": "BOOTSTRAP",
+          "level": true
+        }
+      ]
+    }
+  ],
+  "uarts": [
+    {
+      "name": "console",
+      "baudrate": 115200,
+      "parity": "None",
+      "stopbits": "Stop1"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+# Copyright lowRISC contributors.
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+
+load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+load("//rules:quality.bzl", "clang_format_check", "html_coverage_report", "license_check")
+
+package(default_visibility = ["//visibility:public"])
+
+buildifier(
+    name = "buildifier_fix",
+    exclude_patterns = ["./**/vendor/**"],
+)
+
+buildifier(
+    name = "buildifier_check",
+    diff_command = "diff -u",
+    exclude_patterns = ["./**/vendor/**"],
+    mode = "diff",
+)
+
+license_check(
+    name = "license_check",
+)
+
+clang_format_check(
+    name = "clang_format_check",
+    exclude_patterns = [
+        # Vendored source code dirs
+        "./**/vendor/**",
+        # Rust cargo build dirs
+        "./**/target/**",
+        # Meson build dirs
+        "./build-out/**",
+        "./build-bin/**",
+        # fusesoc build dir
+        "./build/**",
+    ],
+    mode = "diff",
+)
+
+clang_format_check(
+    name = "clang_format_fix",
+    exclude_patterns = [
+        # Vendored source code dirs
+        "./**/vendor/**",
+        # Rust cargo build dirs
+        "./**/target/**",
+        # Meson build dirs
+        "./build-out/**",
+        "./build-bin/**",
+        # fusesoc build dir
+        "./build/**",
+    ],
+    mode = "fix",
+)
+
+html_coverage_report(
+    name = "html_coverage_report",
+)
+
+filegroup(
+    name = "cores",
+    srcs = [
+        "check_tool_requirements.core",
+        "topgen.core",
+        "topgen-reg-only.core",
+    ],
+)
