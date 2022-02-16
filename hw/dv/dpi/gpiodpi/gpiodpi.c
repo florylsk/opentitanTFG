@@ -153,7 +153,8 @@ void gpiodpi_device_to_host(void *ctx_void, svBitVecVal *gpio_data,
     }
   }
   *pin_char = '\n';
-
+  printf("DEVICE TO HOST OPERATION\n");
+  printf("Writing string %s to gpio-read pipe\n",gpio_str);
   ssize_t written = write(ctx->dev_to_host_fifo, gpio_str, ctx->n_bits + 1);
   assert(written == ctx->n_bits + 1);
 }
@@ -198,6 +199,7 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   gpio_str[read_len] = '\0';
 
   char *gpio_text = gpio_str;
+  printf("HOST TO DEVICE OPERATION\n");
   for (; *gpio_text != '\0'; ++gpio_text) {
     switch (*gpio_text) {
       case '\n':
@@ -212,6 +214,7 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
           fprintf(stderr,
                   "GPIO: Host tried to pull disabled pin low: pin %2d\n", idx);
         }
+        printf("GPIO Bit #%d changed to 0\n",idx);
         CLR_BIT(ctx->driven_pin_values, idx);
         break;
       }
@@ -223,6 +226,7 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
           fprintf(stderr,
                   "GPIO: Host tried to pull disabled pin high: pin %2d\n", idx);
         }
+        printf("GPIO Bit #%d changed to 1\n",idx);
         SET_BIT(ctx->driven_pin_values, idx);
         break;
       }
