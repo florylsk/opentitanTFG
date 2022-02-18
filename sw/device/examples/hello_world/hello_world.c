@@ -69,7 +69,6 @@ int main(int argc, char **argv) {
   while (true) {
     usleep(10 * 1000);  // 10 ms
     gpio_state = demo_gpio_to_log_echo(&gpio, gpio_state);
-    LOG_INFO("gpiostate after read:%d",gpio_state);
     demo_spi_to_log_echo(&spi, &spi_config);
     demo_uart_to_uart_and_gpio_echo(&uart, &gpio);
   }

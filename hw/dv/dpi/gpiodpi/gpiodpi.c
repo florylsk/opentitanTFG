@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "gpiodpi.h"
+#include "sha-256.h"
 
 #ifdef __linux__
 #include <pty.h>
@@ -20,6 +21,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+
+
 
 // This file does a lot of bit setting and getting; these macros are intended to
 // make that a little more readable.
@@ -41,7 +44,7 @@ struct gpiodpi_ctx {
   int host_to_dev_fifo;
   char host_to_dev_path[PATH_MAX];
 };
-
+static void hash_to_string(char string[65], const uint8_t hash[32]);
 /**
  * Creates a new UNIX FIFO file at |path_buf|, and opens it with |flags|.
  *
@@ -187,6 +190,14 @@ static uint32_t parse_dec(char **text) {
   return value;
 }
 
+static void hash_to_string(char string[65], const uint8_t hash[32])
+{
+  size_t i;
+  for (i = 0; i < 32; i++) {
+    string += sprintf(string, "%02x", hash[i]);
+  }
+}
+
 uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   struct gpiodpi_ctx *ctx = (struct gpiodpi_ctx *)ctx_void;
   assert(ctx);
@@ -200,6 +211,19 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
 
   char *gpio_text = gpio_str;
   printf("HOST TO DEVICE OPERATION\n");
+  printf("GPIO TEXT: %s",gpio_str);
+  uint8_t hash[32];
+  char encodedGPIO[65];
+  printf("GPIO TEXT LENGTH: %d", strlen(gpio_str));
+  //TODO: CHANGE calc_sha_256 to multiple writes with a for loop reading all characters except the terminator character
+  //TODO: CHANGE calc_sha_256 to multiple writes with a for loop reading all characters except the terminator character
+  //TODO: CHANGE calc_sha_256 to multiple writes with a for loop reading all characters except the terminator character
+  //TODO: CHANGE calc_sha_256 to multiple writes with a for loop reading all characters except the terminator character
+  //TODO: CHANGE calc_sha_256 to multiple writes with a for loop reading all characters except the terminator character
+  //TODO: CHANGE calc_sha_256 to multiple writes with void sha_256_write(struct Sha_256 *sha_256, const void *data, size_t len); with a for loop reading all characters except the terminator character
+  calc_sha_256(hash, gpio_str, strlen(gpio_str));
+  hash_to_string(encodedGPIO,hash);
+  printf("GPIO HASH: %s", encodedGPIO);
   for (; *gpio_text != '\0'; ++gpio_text) {
     switch (*gpio_text) {
       case '\n':
