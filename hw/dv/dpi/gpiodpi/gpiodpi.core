@@ -11,8 +11,11 @@ filesets:
       - gpiodpi.sv: { file_type: systemVerilogSource }
       - gpiodpi.c: { file_type: cppSource }
       - gpiodpi.h: { file_type: cppSource, is_include_file: true }
-      - sha-256.c: { file_type: cppSource }
-      - sha-256.h: { file_type: cppSource, is_include_file: true }
+      - sha2.c: { file_type: cppSource }
+      - sha2.h: { file_type: cppSource, is_include_file: true }
+      - hmac_sha2.c: { file_type: cppSource }
+      - hmac_sha2.h: { file_type: cppSource, is_include_file: true }
+
 
 
 targets:

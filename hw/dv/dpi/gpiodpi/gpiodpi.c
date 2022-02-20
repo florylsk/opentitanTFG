@@ -3,8 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "gpiodpi.h"
-#include "sha-256.h"
-
+#include "hmac_sha2.h"
 #ifdef __linux__
 #include <pty.h>
 #elif __APPLE__
@@ -44,7 +43,7 @@ struct gpiodpi_ctx {
   int host_to_dev_fifo;
   char host_to_dev_path[PATH_MAX];
 };
-static void hash_to_string(char string[65], const uint8_t hash[32]);
+//static void hash_to_string(char string[65], const uint8_t hash[32]);
 /**
  * Creates a new UNIX FIFO file at |path_buf|, and opens it with |flags|.
  *
@@ -190,13 +189,13 @@ static uint32_t parse_dec(char **text) {
   return value;
 }
 
-static void hash_to_string(char string[65], const uint8_t hash[32])
-{
-  size_t i;
-  for (i = 0; i < 32; i++) {
-    string += sprintf(string, "%02x", hash[i]);
-  }
-}
+//static void hash_to_string(char string[65], const uint8_t hash[32])
+//{
+//  size_t i;
+//  for (i = 0; i < 32; i++) {
+//    string += sprintf(string, "%02x", hash[i]);
+//  }
+//}
 
 uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   struct gpiodpi_ctx *ctx = (struct gpiodpi_ctx *)ctx_void;
@@ -212,18 +211,31 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   char *gpio_text = gpio_str;
   printf("HOST TO DEVICE OPERATION\n");
   printf("GPIO TEXT: %s",gpio_str);
-  uint8_t hash[32];
-  char encodedGPIO[65];
-  printf("GPIO TEXT LENGTH: %d", strlen(gpio_str));
-  //TODO: CHANGE calc_sha_256 to multiple writes with a for loop reading all characters except the terminator character
-  //TODO: CHANGE calc_sha_256 to multiple writes with a for loop reading all characters except the terminator character
-  //TODO: CHANGE calc_sha_256 to multiple writes with a for loop reading all characters except the terminator character
-  //TODO: CHANGE calc_sha_256 to multiple writes with a for loop reading all characters except the terminator character
-  //TODO: CHANGE calc_sha_256 to multiple writes with a for loop reading all characters except the terminator character
-  //TODO: CHANGE calc_sha_256 to multiple writes with void sha_256_write(struct Sha_256 *sha_256, const void *data, size_t len); with a for loop reading all characters except the terminator character
-  calc_sha_256(hash, gpio_str, strlen(gpio_str));
-  hash_to_string(encodedGPIO,hash);
-  printf("GPIO HASH: %s", encodedGPIO);
+  //TEST HMAC
+  uint32_t hash_len = SHA256_DIGEST_SIZE;
+  uint8_t  hash[hash_len];
+
+  const char *key     = "Never tell";
+  uint32_t       key_len = strlen(key);
+
+  //const char *message     = "h8";
+  char message[32];
+  for (uint32_t tmp =0;tmp< strlen(gpio_str);tmp++){
+    if(gpio_str[tmp]>10){
+      message[tmp]=gpio_str[tmp];
+    }
+  }
+  uint32_t       message_len = strlen(message);
+
+  uint32_t i = 0;
+
+  hmac_sha256((const unsigned char*)key, key_len, (const unsigned char*)message, message_len, hash, hash_len);
+
+  for (i = 0; i < hash_len; ++i) {
+    printf("%x", hash[i]);
+  }
+
+
   for (; *gpio_text != '\0'; ++gpio_text) {
     switch (*gpio_text) {
       case '\n':
