@@ -201,8 +201,8 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   struct gpiodpi_ctx *ctx = (struct gpiodpi_ctx *)ctx_void;
   assert(ctx);
 
-  char gpio_str[32 + 2];
-  ssize_t read_len = read(ctx->host_to_dev_fifo, gpio_str, 32 + 1);
+  char gpio_str[100];
+  ssize_t read_len = read(ctx->host_to_dev_fifo, gpio_str, 99);
   if (read_len < 0) {
     return ctx->driven_pin_values;
   }
@@ -210,30 +210,42 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
 
   char *gpio_text = gpio_str;
   printf("HOST TO DEVICE OPERATION\n");
-  printf("GPIO TEXT: %s",gpio_str);
-  //TEST HMAC
-  uint32_t hash_len = SHA256_DIGEST_SIZE;
-  uint8_t  hash[hash_len];
+  printf("RAW TEXT: %s\n",gpio_str);
+  char hash[64];
+  char operations[32];
+  strncpy(hash,gpio_str,63);
+  //hash[64]='\0';
+  strncpy(operations,gpio_str+64,32);
+  //operations[32]='\0';
+  printf("RAW TEXT: %s\n",gpio_str);
+  printf("INPUT HASH STRING: %s\n",hash);
+  printf("INPUT OPERATIONS STRING: %s\n",operations);
+  printf("RAW Lenght: %d, HASH Length: %d, OP Legnth: %d\n", strlen(gpio_str),strlen(hash),strlen(operations));
 
-  const char *key     = "Never tell";
-  uint32_t       key_len = strlen(key);
 
-  //const char *message     = "h8";
-  char message[32];
-  for (uint32_t tmp =0;tmp< strlen(gpio_str);tmp++){
-    if(gpio_str[tmp]>10){
-      message[tmp]=gpio_str[tmp];
-    }
-  }
-  uint32_t       message_len = strlen(message);
-
-  uint32_t i = 0;
-
-  hmac_sha256((const unsigned char*)key, key_len, (const unsigned char*)message, message_len, hash, hash_len);
-
-  for (i = 0; i < hash_len; ++i) {
-    printf("%x", hash[i]);
-  }
+//  //TEST HMAC
+//  uint32_t hash_len = SHA256_DIGEST_SIZE;
+//  uint8_t  hash[hash_len];
+//
+//  const char *key     = "Never tell";
+//  uint32_t       key_len = strlen(key);
+//
+//  //const char *message     = "h8";
+//  char message[32];
+//  for (uint32_t tmp =0;tmp< strlen(gpio_str);tmp++){
+//    if(gpio_str[tmp]>10){
+//      message[tmp]=gpio_str[tmp];
+//    }
+//  }
+//  uint32_t       message_len = strlen(message);
+//
+//  uint32_t i = 0;
+//
+//  hmac_sha256((const unsigned char*)key, key_len, (const unsigned char*)message, message_len, hash, hash_len);
+//
+//  for (i = 0; i < hash_len; ++i) {
+//    printf("%x", hash[i]);
+//  }
 
 
   for (; *gpio_text != '\0'; ++gpio_text) {
