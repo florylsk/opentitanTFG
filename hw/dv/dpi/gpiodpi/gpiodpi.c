@@ -43,7 +43,7 @@ struct gpiodpi_ctx {
   int host_to_dev_fifo;
   char host_to_dev_path[PATH_MAX];
 };
-//static void hash_to_string(char string[65], const uint8_t hash[32]);
+static void hash_to_string(char string[65], const uint8_t hash[32]);
 /**
  * Creates a new UNIX FIFO file at |path_buf|, and opens it with |flags|.
  *
@@ -189,13 +189,13 @@ static uint32_t parse_dec(char **text) {
   return value;
 }
 
-//static void hash_to_string(char string[65], const uint8_t hash[32])
-//{
-//  size_t i;
-//  for (i = 0; i < 32; i++) {
-//    string += sprintf(string, "%02x", hash[i]);
-//  }
-//}
+static void hash_to_string(char string[65], const uint8_t hash[32])
+{
+  size_t i;
+  for (i = 0; i < 32; i++) {
+    string += sprintf(string, "%02x", hash[i]);
+  }
+}
 
 uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   struct gpiodpi_ctx *ctx = (struct gpiodpi_ctx *)ctx_void;
@@ -236,11 +236,17 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   uint32_t i = 0;
 
   hmac_sha256((const unsigned char*)key, key_len, (const unsigned char*)message, message_len, hash, hash_len);
-  printf("CALCULATED HASH: ");
-  for (i = 0; i < hash_len; ++i) {
-    printf("%x", hash[i]);
-  }
+  //transform calculated hash to char array from uint8 array
 
+  char calcStrHash[65];
+  hash_to_string(calcStrHash,hash);
+  printf("CALCULATED HASH: %s",calcStrHash);
+  if(strncmp(calcStrHash,inHash,63)==0){
+    printf("\nHASHES MATCH!\n");
+  }
+  else{
+    printf("\nCORRUPT DATA!\n");
+  }
 
   for (; *gpio_text != '\0'; ++gpio_text) {
     switch (*gpio_text) {
