@@ -210,7 +210,6 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
 
   char *gpio_text = gpio_str;
   printf("HOST TO DEVICE OPERATION\n");
-  printf("RAW TEXT: %s\n",gpio_str);
   char inHash[65];
   char operations[32];
   strncpy(inHash,gpio_str,64);
@@ -242,10 +241,11 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   hash_to_string(calcStrHash,hash);
   printf("CALCULATED HASH: %s",calcStrHash);
   if (strcmp(inHash,calcStrHash)==0){
-    printf("\nHASHES MATCH!\n");
+    printf("\nVERIFIED DATA!\n");
   }
   else{
     printf("\nCORRUPT DATA!\n");
+    return ctx->driven_pin_values;
   }
 
   for (; *gpio_text != '\0'; ++gpio_text) {
