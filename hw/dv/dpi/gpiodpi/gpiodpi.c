@@ -211,10 +211,10 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   char *gpio_text = gpio_str;
   printf("HOST TO DEVICE OPERATION\n");
   printf("RAW TEXT: %s\n",gpio_str);
-  char inHash[64];
+  char inHash[65];
   char operations[32];
-  strncpy(inHash,gpio_str,63);
-  strncpy(operations,gpio_str+64,32);
+  strncpy(inHash,gpio_str,64);
+  strncpy(operations,gpio_str+65,32);
   printf("INPUT HASH STRING: %s\n",inHash);
   printf("INPUT OPERATIONS STRING: %s\n",operations);
 
@@ -241,7 +241,7 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   char calcStrHash[65];
   hash_to_string(calcStrHash,hash);
   printf("CALCULATED HASH: %s",calcStrHash);
-  if(strncmp(calcStrHash,inHash,63)==0){
+  if (strcmp(inHash,calcStrHash)==0){
     printf("\nHASHES MATCH!\n");
   }
   else{
