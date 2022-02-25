@@ -156,9 +156,6 @@ static void check_digest(const dif_hmac_t *hmac,
           "Digest mismatch, expected: 0x%X at index [%i] but got: 0x%X.",
           expected_digest[i], i, digest_result.digest[i]);
   }
-  for (int i=0;i<8;++i){
-    LOG_INFO("HEX %d: %x",i,digest_result.digest[i]);
-  }
 }
 
 static void run_test(const dif_hmac_t *hmac, const char *data, size_t len,

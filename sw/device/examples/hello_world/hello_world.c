@@ -13,6 +13,7 @@
 #include "sw/device/lib/runtime/print.h"
 #include "sw/device/lib/testing/check.h"
 #include "sw/device/lib/testing/test_framework/test_status.h"
+
 #include "hw/top_earlgrey/sw/autogen/top_earlgrey.h"
 
 static dif_gpio_t gpio;
@@ -65,9 +66,10 @@ int main(int argc, char **argv) {
 
   CHECK_DIF_OK(dif_spi_device_send(&spi, &spi_config, "SPI!", 4,
                                    /*bytes_sent=*/NULL));
+
   uint32_t gpio_state = 0;
   while (true) {
-    usleep(10 * 1000);  // 10 ms
+    busy_spin_micros(10 * 1000);  // 10 ms
     gpio_state = demo_gpio_to_log_echo(&gpio, gpio_state);
     demo_spi_to_log_echo(&spi, &spi_config);
     demo_uart_to_uart_and_gpio_echo(&uart, &gpio);

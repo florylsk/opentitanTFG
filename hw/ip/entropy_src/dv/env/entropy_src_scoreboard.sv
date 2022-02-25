@@ -147,15 +147,20 @@ class entropy_src_scoreboard extends cip_base_scoreboard#(
     max_repcnt_symbol = (repcnt_symbol > max_repcnt_symbol) ? repcnt_symbol : max_repcnt_symbol;
   endfunction
 
-  // TODO: Revisit after resolution of #9759
-  function int calc_adaptp_test(queue_of_rng_val_t window);
+  function int calc_adaptp_test(queue_of_rng_val_t window, output int maxval, output int minval);
+    int test_cnt[RNG_BUS_WIDTH];
+    int minq[$], maxq[$];
     int result = '0;
     for (int i = 0; i < window.size(); i++) begin
       for (int j = 0; j < RNG_BUS_WIDTH; j++) begin
-         result += window[i][j];
+         test_cnt[j] += window[i][j];
       end
     end
-    return result;
+    maxq = test_cnt.max();
+    maxval = maxq[0];
+    minq = test_cnt.min();
+    minval = minq[0];
+    return test_cnt.sum();
   endfunction
 
   function int calc_bucket_test(queue_of_rng_val_t window);
@@ -382,18 +387,19 @@ class entropy_src_scoreboard extends cip_base_scoreboard#(
 
   endfunction
 
-  // TODO: Revisit after resolution of #9759
   function bit evaluate_adaptp_test(queue_of_rng_val_t window, bit fips_mode);
-    int value;
+    int value, minval, maxval;
     bit fail_hi, fail_lo;
+    bit total_scope;
+    total_scope = (ral.conf.threshold_scope.get_mirrored_value() == prim_mubi_pkg::MuBi4True);
 
-    value = calc_adaptp_test(window);
+    value = calc_adaptp_test(window, maxval, minval);
 
-    update_watermark("adaptp_lo", fips_mode, value);
-    update_watermark("adaptp_hi", fips_mode, value);
+    update_watermark("adaptp_lo", fips_mode, total_scope ? value : minval);
+    update_watermark("adaptp_hi", fips_mode, total_scope ? value : maxval);
 
-    fail_lo = check_threshold("adaptp_lo", fips_mode, value);
-    fail_hi = check_threshold("adaptp_hi", fips_mode, value);
+    fail_lo = check_threshold("adaptp_lo", fips_mode, total_scope ? value : minval);
+    fail_hi = check_threshold("adaptp_hi", fips_mode, total_scope ? value : maxval);
 
     return (fail_hi || fail_lo);
   endfunction
@@ -411,18 +417,19 @@ class entropy_src_scoreboard extends cip_base_scoreboard#(
     return fail;
   endfunction
 
-  // TODO: Revisit after resolution of #9759
   function bit evaluate_markov_test(queue_of_rng_val_t window, bit fips_mode);
     int value, minval, maxval;
     bit fail_hi, fail_lo;
+    bit total_scope;
+    total_scope = (ral.conf.threshold_scope.get_mirrored_value() == prim_mubi_pkg::MuBi4True);
 
     value = calc_markov_test(window, maxval, minval);
 
-    update_watermark("markov_lo", fips_mode, minval);
-    update_watermark("markov_hi", fips_mode, maxval);
+    update_watermark("markov_lo", fips_mode, total_scope ? value : minval);
+    update_watermark("markov_hi", fips_mode, total_scope ? value : maxval);
 
-    fail_lo = check_threshold("markov_lo", fips_mode, minval);
-    fail_hi = check_threshold("markov_hi", fips_mode, maxval);
+    fail_lo = check_threshold("markov_lo", fips_mode, total_scope ? value : minval);
+    fail_hi = check_threshold("markov_hi", fips_mode, total_scope ? value : maxval);
 
     return (fail_hi || fail_lo);
   endfunction
@@ -740,7 +747,9 @@ class entropy_src_scoreboard extends cip_base_scoreboard#(
       end
       "intr_test": begin
       end
-      "regwen_me": begin
+      "me_regwen": begin
+      end
+      "sw_regupd": begin
       end
       "regwen": begin
       end
@@ -882,8 +891,7 @@ class entropy_src_scoreboard extends cip_base_scoreboard#(
     int                              pass_cnt;
 
     dut_phase = convert_seed_idx_to_phase(seed_idx,
-                                          cfg.type_bypass == prim_mubi_pkg::MuBi4True,
-                                          cfg.boot_bypass_disable == prim_mubi_pkg::MuBi4True);
+                                          cfg.fips_enable == prim_mubi_pkg::MuBi4True);
 
     sample_rng_frames = sample.size();
 
@@ -1017,8 +1025,7 @@ class entropy_src_scoreboard extends cip_base_scoreboard#(
       `uvm_info(`gfn, $sformatf("SEED_IDX: %01d", seed_idx), UVM_FULL)
 
       dut_fsm_phase = convert_seed_idx_to_phase(seed_idx,
-          cfg.type_bypass == prim_mubi_pkg::MuBi4True,
-          cfg.boot_bypass_disable == prim_mubi_pkg::MuBi4True);
+                                                cfg.fips_enable == prim_mubi_pkg::MuBi4True);
 
       case (dut_fsm_phase)
         BOOT: begin
@@ -1033,6 +1040,10 @@ class entropy_src_scoreboard extends cip_base_scoreboard#(
           pass_requirement = 1;
           ht_fips_mode     = 1;
         end
+        HALTED: begin
+          // exit this task.
+          return;
+        end
         default: begin
           `uvm_fatal(`gfn, "Invalid predicted dut state (bug in environment)")
         end
@@ -1040,8 +1051,7 @@ class entropy_src_scoreboard extends cip_base_scoreboard#(
 
       `uvm_info(`gfn, $sformatf("phase: %s\n", dut_fsm_phase.name), UVM_HIGH)
 
-      window_size = rng_window_size(seed_idx, cfg.type_bypass == prim_mubi_pkg::MuBi4True,
-                                    cfg.boot_bypass_disable == prim_mubi_pkg::MuBi4True,
+      window_size = rng_window_size(seed_idx, cfg.fips_enable == prim_mubi_pkg::MuBi4True,
                                     cfg.fips_window_size);
 
       `uvm_info(`gfn, $sformatf("window_size: %08d\n", window_size), UVM_HIGH)
@@ -1064,13 +1074,19 @@ class entropy_src_scoreboard extends cip_base_scoreboard#(
       end
 
       while (window.size() < window_rng_frames) begin
+        string fmt;
         wait_rng_queue(rng_val, disable_detected);
+
         if (disable_detected) begin
           // Exit this task.
           return;
         end else begin
           window.push_back(rng_val);
           observe_data.push_back(rng_val);
+
+          fmt = "RNG element: %0x, idx: %0d";
+          `uvm_info(`gfn, $sformatf(fmt, rng_val, window.size()), UVM_DEBUG)
+
           // The repetition count is updated continuously.
           // The other health checks only operate on complete windows, and are processed later.
           // TODO: Confirm how repcnt is applied in bit-select mode

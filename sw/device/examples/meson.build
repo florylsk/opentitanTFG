@@ -12,7 +12,6 @@ sw_examples_demos = declare_dependency(
       sw_lib_dif_spi_device,
       sw_lib_runtime_log,
       sw_lib_dif_uart,
-      sw_lib_dif_hmac,
     ],
   )
 )

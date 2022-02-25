@@ -164,7 +164,7 @@ _start:
 .L_ast_init_skip:
   // Enable entropy complex - this is not the full enable
   li   a0, TOP_EARLGREY_ENTROPY_SRC_BASE_ADDR
-  li   t0, 0x55505a
+  li   t0, 0x555055
   sw   t0, ENTROPY_SRC_CONF_REG_OFFSET(a0)
 
   li   a0, TOP_EARLGREY_ENTROPY_SRC_BASE_ADDR
@@ -178,6 +178,17 @@ _start:
   li   a0, TOP_EARLGREY_EDN0_BASE_ADDR
   li   t0, 0x55aa
   sw   t0, EDN_CTRL_REG_OFFSET(a0)
+
+  // Remove address space protections by configuring entry 15 as
+  // read-write-execute for the entire address space and then clearing
+  // all other entries.
+  li   t0, (0x9f << 24) // Locked NAPOT read-write-execute.
+  csrw pmpcfg3, t0
+  li   t0, -1           // NAPOT encoded region covering entire 32-bit address space.
+  csrw pmpaddr15, t0
+  csrw pmpcfg0, zero
+  csrw pmpcfg1, zero
+  csrw pmpcfg2, zero
 
   // Zero out the `.bss` segment.
   la   a0, _bss_start

@@ -179,6 +179,21 @@
       package: "flash_ctrl_pkg"
     }
 
+    { struct: "ast_obs_ctrl",
+      type: "uni",
+      name: "obs_ctrl",
+      act: "rcv",
+      package: "ast_pkg"
+    }
+
+    { struct: "logic",
+      type: "uni",
+      name: "fla_obs",
+      act: "req",
+      width: "8",
+      package: ""
+    }
+
   ],
   countermeasures: [
     { name: "BUS.INTEGRITY",
@@ -315,7 +330,13 @@
     },
 
     // The following parameters are derived from topgen and should not be
-    // direclty modified.
+    // directly modified.
+    { name: "NumInfoTypes",
+      desc: "Number of info partition types",
+      type: "int",
+      default: "${cfg.info_types}",
+      local: "true"
+    },
     % for type in range(cfg.info_types):
     { name: "NumInfos${type}",
       desc: "Number of configurable flash info pages for info type ${type}",

@@ -12,7 +12,7 @@ use opentitanlib::app::command::CommandDispatch;
 use opentitanlib::app::TransportWrapper;
 use opentitanlib::bootstrap::{Bootstrap, BootstrapOptions, BootstrapProtocol};
 use opentitanlib::transport;
-use opentitanlib::util::image::ImageAssembler;
+use opentitanlib::image::image::ImageAssembler;
 use opentitanlib::util::parse_int::ParseInt;
 
 /// Bootstrap the target device.
@@ -51,9 +51,9 @@ impl BootstrapCommand {
             !(self.filename.len() > 1 || self.filename[0].contains('@')),
             "The `emulator` protocol does not support image assembly"
         );
-        transport.dispatch(&transport::Bootstrap {
+        Ok(transport.dispatch(&transport::Bootstrap {
             image_path: PathBuf::from(&self.filename[0]),
-        })
+        })?)
     }
 
     fn payload(&self) -> Result<Vec<u8>> {

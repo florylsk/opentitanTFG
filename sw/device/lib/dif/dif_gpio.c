@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "sw/device/lib/dif/dif_gpio.h"
+
 #include "gpio_regs.h"  // Generated.
 
 /**
@@ -185,6 +186,7 @@ dif_result_t dif_gpio_read_all(const dif_gpio_t *gpio,
   }
 
   *state = mmio_region_read32(gpio->base_addr, GPIO_DATA_IN_REG_OFFSET);
+
   return kDifOk;
 }
 

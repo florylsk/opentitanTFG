@@ -11,11 +11,20 @@ filesets:
       - gpiodpi.sv: { file_type: systemVerilogSource }
       - gpiodpi.c: { file_type: cppSource }
       - gpiodpi.h: { file_type: cppSource, is_include_file: true }
-      - sha2.c: { file_type: cppSource }
-      - sha2.h: { file_type: cppSource, is_include_file: true }
-      - hmac_sha2.c: { file_type: cppSource }
-      - hmac_sha2.h: { file_type: cppSource, is_include_file: true }
-
+      - tomcrypt.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_argchk.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_cfg.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_cipher.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_custom.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_hash.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_macros.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_math.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_misc.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_pk.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_pkcs.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_private.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_prng.h: { file_type: cppSource, is_include_file: true }
+      - tomcrypt_mac.h: { file_type: cppSource, is_include_file: true }
 
 
 targets:

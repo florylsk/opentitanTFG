@@ -19,7 +19,6 @@
 #include "sha256.h"
 #include "util.h"
 
-
 static void HMAC_init(LITE_HMAC_CTX *ctx, const void *key, unsigned int len) {
   unsigned int i;
   memset(&ctx->opad[0], 0, sizeof(ctx->opad));

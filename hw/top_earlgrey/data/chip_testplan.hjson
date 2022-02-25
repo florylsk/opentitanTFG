@@ -6,11 +6,11 @@
 
   // TODO: remove the common testplans if not applicable
   import_testplans: ["hw/dv/tools/dvsim/testplans/csr_testplan.hjson",
-                     "hw/dv/tools/dvsim/testplans/enable_reg_testplan.hjson",
                      // TODO #5484, comment these 2 lines out because spi host memory is dummy
                      // "hw/dv/tools/dvsim/testplans/mem_testplan.hjson",
                      "hw/dv/tools/dvsim/testplans/tl_device_access_types_testplan.hjson",
-                     "hw/ip/tlul/data/tlul_testplan.hjson"]
+                     "hw/ip/tlul/data/tlul_testplan.hjson",
+                     "sw/device/silicon_creator/mask_rom/e2e_tests/mask_rom_e2e_testplan.hjson"]
 
   testpoints: [
     ///////////////////////////////////////////////////////////////////////////
@@ -1939,7 +1939,7 @@
               pre-computed using a reference model.
             '''
       milestone: V2
-      tests: []
+      tests: ["chip_sw_otbn_ecdsa_op_irq"]
     }
     {
       name: chip_sw_otbn_rnd_entropy
@@ -1952,7 +1952,7 @@
               some data.
             '''
       milestone: V2
-      tests: []
+      tests: ["chip_sw_otbn_randomness"]
     }
     {
       name: chip_sw_otbn_urnd_entropy
@@ -1961,7 +1961,7 @@
             - Similar to chip_otbn_rnd_entropy, but verifies the URND bits.
             '''
       milestone: V2
-      tests: []
+      tests:  ["chip_sw_otbn_randomness"]
     }
     {
       name: chip_sw_otbn_idle
@@ -2081,7 +2081,7 @@
             TODO: how to deal with the scramble keys on low power exit?
             '''
       milestone: V2
-      tests: []
+      tests: ["chip_sw_sleep_sram_ret_contents"]
     }
     {
       name: chip_sw_sram_execution
@@ -2586,6 +2586,67 @@
       milestone: V2
       tests: []
     }
+
+    //////////////////
+    // CPU          //
+    // RV_CORE_IBEX //
+    //////////////////
+
+    {
+      name: chip_sw_rv_core_ibex_rnd
+      desc: '''Verify the functionality of the random number generation CSRs.
+
+               - Enable entropy complex so `RND_DATA` can get entropy.
+               - Perform multiple reads from `RND_DATA` polling `RND_STATUS` in
+                 between to only read valid data. Check different random bits
+                 are provided each time.
+               - Ensure `RND_STATUS` indicate invalid data immediately after
+                 `RND_DATA` read.
+               - Perform repeated reads from `RND_DATA` without `RND_STATUS`
+                 polling to check read when invalid doesn't block.
+            '''
+      milestone: V2
+      tests: []
+    }
+    {
+      name: chip_sw_rv_core_ibex_address_translation
+      desc: '''Verify the simple address translation functionality.
+
+               - Setup address translation for both slots on the the I and D
+                 side and check correct translation for I and D accesses.
+               - Switch address translation to use different regions that
+                 overlap for both slots and check translation again. Ensure some
+                 test accesses match both regions, where the lowest indexed one
+                 takes priority.
+               - Turn off address translation and confirm regions are no longer
+                 being remapped.
+            '''
+      milestone: V2
+      tests: []
+   }
+
+   {
+      name: chip_sw_rv_core_ibex_fault_dump
+      desc: '''Verify the functionality of the ibex fault dump.
+
+               - Purposely create an ibex exception during execution through reads to an ummapped address.
+               - Ensure the rstmgr fault dump correctly captures the related addresses to the exception.
+            '''
+      milestone: V2
+      tests: []
+   }
+
+   {
+      name: chip_sw_rv_core_ibex_double_fault
+      desc: '''Verify the functionality of the ibex double fault dump.
+
+               - Purposely create an ibex double exception during execution, by performing an unmapped read and in the exception handler perform another unmapped read.
+               - Ensure the rstmgr fault dump correctly captures both dumps correctly and indicates the previous dump is valid.
+            '''
+      milestone: V2
+      tests: []
+   }
+
 
     ////////////////////////////
     // System level scenarios //

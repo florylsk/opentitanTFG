@@ -580,12 +580,13 @@ sw_tests += {
   }
 }
 
-otbn_ecdsa_p256_test_lib = declare_dependency(
+otbn_ecdsa_op_irq_test_lib = declare_dependency(
   link_with: static_library(
-    'otbn_ecdsa_p256_test_lib',
-    sources: ['otbn_ecdsa_p256_test.c'],
+    'otbn_ecdsa_op_irq_test_lib',
+    sources: ['otbn_ecdsa_op_irq_test.c'],
     dependencies: [
       sw_lib_testing_entropy_testutils,
+      sw_lib_dif_rv_plic,
       sw_lib_runtime_otbn,
       sw_lib_runtime_log,
       sw_lib_runtime_ibex,
@@ -595,8 +596,8 @@ otbn_ecdsa_p256_test_lib = declare_dependency(
   ),
 )
 sw_tests += {
-  'otbn_ecdsa_p256_test': {
-    'library': otbn_ecdsa_p256_test_lib
+  'otbn_ecdsa_op_irq_test': {
+    'library': otbn_ecdsa_op_irq_test_lib
   }
 }
 
@@ -724,6 +725,29 @@ sw_tests += {
   }
 }
 
+# SRAM Controller low power retention SRAM contents test.
+sram_ctrl_sleep_sram_ret_contents_test_lib = declare_dependency(
+  link_with: static_library(
+    'sram_ctrl_sleep_sram_ret_contents_test_lib',
+    sources: ['sram_ctrl_sleep_sram_ret_contents_test.c'],
+    dependencies: [
+      sw_lib_mmio,
+      sw_lib_dif_aon_timer,
+      sw_lib_dif_pwrmgr,
+      sw_lib_dif_rstmgr,
+      sw_lib_testing_aon_timer_testutils,
+      sw_lib_testing_pwrmgr_testutils,
+      sw_lib_testing_rstmgr_testutils,
+      sw_lib_runtime_log,
+      top_earlgrey,
+    ],
+  ),
+)
+sw_tests += {
+  'sram_ctrl_sleep_sram_ret_contents_test': {
+    'library': sram_ctrl_sleep_sram_ret_contents_test_lib,
+  }
+}
 
 # AON Timer irq test.
 aon_timer_irq_test = declare_dependency(
@@ -777,6 +801,32 @@ aon_timer_wdog_bite_reset_test = declare_dependency(
 sw_tests += {
   'aon_timer_wdog_bite_reset_test': {
     'library': aon_timer_wdog_bite_reset_test,
+  }
+}
+
+# AON Timer sleep wdog sleep pause test.
+aon_timer_sleep_wdog_sleep_pause_test = declare_dependency(
+  link_with: static_library(
+    'aon_timer_sleep_wdog_sleep_pause_test',
+    sources: [
+      hw_ip_rstmgr_reg_h,
+      'aon_timer_sleep_wdog_sleep_pause_test.c',
+    ],
+    dependencies: [
+      sw_lib_dif_rstmgr,
+      sw_lib_dif_aon_timer,
+      sw_lib_dif_pwrmgr,
+      sw_lib_runtime_log,
+      sw_lib_testing_aon_timer_testutils,
+      sw_lib_testing_rstmgr_testutils,
+      sw_lib_testing_pwrmgr_testutils,
+      top_earlgrey,
+    ],
+  ),
+)
+sw_tests += {
+  'aon_timer_sleep_wdog_sleep_pause_test': {
+    'library': aon_timer_sleep_wdog_sleep_pause_test,
   }
 }
 
