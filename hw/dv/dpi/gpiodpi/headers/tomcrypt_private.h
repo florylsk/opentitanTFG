@@ -422,9 +422,7 @@ int which ## _export(unsigned char *out, unsigned long *outlen, prng_state *prng
 {                                                                                      \
    unsigned long len = which ## _desc.export_size;                                     \
                                                                                        \
-   LTC_ARGCHK(prng   != NULL);                                                         \
-   LTC_ARGCHK(out    != NULL);                                                         \
-   LTC_ARGCHK(outlen != NULL);                                                         \
+                                                 \
                                                                                        \
    if (*outlen < len) {                                                                \
       *outlen = len;                                                                   \

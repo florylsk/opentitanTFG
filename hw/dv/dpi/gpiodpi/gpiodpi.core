@@ -10,21 +10,129 @@ filesets:
     files:
       - gpiodpi.sv: { file_type: systemVerilogSource }
       - gpiodpi.c: { file_type: cppSource }
+      - rest/multi.c: { file_type: cSource }
+      - rest/radix_to_bin.c: { file_type: cSource }
+      - rest/ltm_desc.c: { file_type: cSource }
+      - rest/sha256.c: { file_type: cSource }
+      - rest/rsa_verify_hash.c: { file_type: cSource }
+      - der_decode/der_decode_sequence_ex.c: { file_type: cSource }
+      - der_length/der_length_sequence.c: { file_type: cSource }
+      - crypt/crypt_hash_descriptor.c: { file_type: cSource }
+      - crypt/crypt_hash_is_valid.c: { file_type: cSource }
+      - pkcs1/pkcs_1_pss_decode.c: { file_type: cSource }
+      - pkcs1/pkcs_1_v1_5_decode.c: { file_type: cSource }
+      - der_length/der_length_asn1_length.c: { file_type: cSource }
+      - der_length/der_length_bit_string.c: { file_type: cSource }
+      - der_length/der_length_boolean.c: { file_type: cSource }
+      - der_length/der_length_custom_type.c: { file_type: cSource }
+      - der_length/der_length_generalizedtime.c: { file_type: cSource }
+      - der_length/der_length_ia5_string.c: { file_type: cSource }
+      - der_length/der_length_integer.c: { file_type: cSource }
+      - der_length/der_length_object_identifier.c: { file_type: cSource }
+      - der_length/der_length_octet_string.c: { file_type: cSource }
+      - der_length/der_length_printable_string.c: { file_type: cSource }
+      - der_length/der_length_sequence.c: { file_type: cSource }
+      - der_length/der_length_short_integer.c: { file_type: cSource }
+      - der_length/der_length_teletex_string.c: { file_type: cSource }
+      - der_length/der_length_utctime.c: { file_type: cSource }
+      - der_length/der_length_utf8_string.c: { file_type: cSource }
+      - der_decode/der_decode_asn1_length.c: { file_type: cSource }
+      - der_decode/der_decode_custom_type.c: { file_type: cSource }
+      - der_decode/der_decode_sequence_ex.c: { file_type: cSource }
+      - rest/der_asn1_maps.c: { file_type: cSource }
+      - der_decode/der_decode_boolean.c: { file_type: cSource }
+      - der_decode/der_decode_integer.c: { file_type: cSource }
+      - der_decode/der_decode_short_integer.c: { file_type: cSource }
+      - der_decode/der_decode_bit_string.c: { file_type: cSource }
+      - der_decode/der_decode_raw_bit_string.c: { file_type: cSource }
+      - der_decode/der_decode_octet_string.c: { file_type: cSource }
+      - der_decode/der_decode_object_identifier.c: { file_type: cSource }
+      - der_decode/der_decode_teletex_string.c: { file_type: cSource }
+      - der_decode/der_decode_ia5_string.c: { file_type: cSource }
+      - der_decode/der_decode_printable_string.c: { file_type: cSource }
+      - der_decode/der_decode_utf8_string.c: { file_type: cSource }
+      - der_decode/der_decode_utctime.c: { file_type: cSource }
+      - der_decode/der_decode_generalizedtime.c: { file_type: cSource }
+      - der_decode/der_decode_choice.c: { file_type: cSource }
+      - rest/der_encode_asn1_identifier.c: { file_type: cSource }
+      - der_decode/der_decode_asn1_identifier.c: { file_type: cSource }
+      - rest/der_encode_asn1_length.c: { file_type: cSource }
+      - der_length/der_length_asn1_identifier.c: { file_type: cSource }
+      - pkcs1/pkcs_1_mgf1.c: { file_type: cSource }
+      - crypt/crypt_find_hash.c: { file_type: cSource }
+      - crypt/crypt_inits.c: { file_type: cSource }
+      - crypt/crypt_argchk.c: { file_type: cSource }
+      - crypt/crypt_constants.c: { file_type: cSource }
+      - crypt/crypt_sizes.c: { file_type: cSource }
+      - rest/zeromem.c: { file_type: cSource }
+      - rest/mem_neq.c: { file_type: cSource }
+      - libtommath/bn_deprecated.c: { file_type: cSource }
+      - libtommath/bn_mp_2expt.c: { file_type: cSource }
+      - libtommath/bn_mp_abs.c: { file_type: cSource }
+      - libtommath/bn_mp_add.c: { file_type: cSource }
+      - libtommath/bn_mp_addmod.c: { file_type: cSource }
+      - libtommath/bn_mp_and.c: { file_type: cSource }
+      - libtommath/bn_mp_clamp.c: { file_type: cSource }
+      - libtommath/bn_mp_clear.c: { file_type: cSource }
+      - libtommath/bn_mp_clear_multi.c: { file_type: cSource }
+      - libtommath/bn_mp_cmp.c: { file_type: cSource }
+      - libtommath/bn_mp_cmp_d.c: { file_type: cSource }
+      - libtommath/bn_mp_cmp_mag.c: { file_type: cSource }
+      - libtommath/bn_mp_cnt_lsb.c: { file_type: cSource }
+      - libtommath/bn_mp_complement.c: { file_type: cSource }
+      - libtommath/bn_mp_copy.c: { file_type: cSource }
+      - libtommath/bn_mp_count_bits.c: { file_type: cSource }
+      - libtommath/bn_mp_submod.c: { file_type: cSource }
+      - libtommath/bn_mp_exptmod.c: { file_type: cSource }
+      - libtommath/bn_mp_montgomery_reduce.c: { file_type: cSource }
+      - libtommath/bn_mp_montgomery_setup.c: { file_type: cSource }
+      - libtommath/bn_mp_invmod.c: { file_type: cSource }
+      - libtommath/bn_mp_sqrmod.c: { file_type: cSource }
+      - libtommath/bn_mp_mulmod.c: { file_type: cSource }
+      - libtommath/bn_mp_lcm.c: { file_type: cSource }
+      - libtommath/bn_mp_gcd.c: { file_type: cSource }
+      - libtommath/bn_mp_sqrmod_prime.c: { file_type: cSource }
+      - libtommath/bn_mp_mul.c: { file_type: cSource }
+      - libtommath/bn_mp_sub.c: { file_type: cSource }
+      - libtommath/bn_mp_rand.c: { file_type: cSource }
+      - libtommath/bn_mp_montgomery_calc_normalization.c: { file_type: cSource }
+      - libtommath/bn_mp_mod_d.c: { file_type: cSource }
+      - libtommath/bn_mp_div_2.c: { file_type: cSource }
+      - libtommath/bn_mp_div.c: { file_type: cSource }
+      - libtommath/bn_mp_sqr.c: { file_type: cSource }
+      - libtommath/bn_mp_mul_d.c: { file_type: cSource }
+      - libtommath/bn_mp_sub_d.c: { file_type: cSource }
+      - libtommath/bn_mp_add_d.c: { file_type: cSource }
+      - libtommath/bn_mp_to_radix.c: { file_type: cSource }
+      - libtommath/bn_mp_from_ubin.c: { file_type: cSource }
+      - libtommath/bn_mp_read_radix.c: { file_type: cSource }
+      - libtommath/bn_mp_2expt.c: { file_type: cSource }
+      - libtommath/bn_mp_set_u32.c: { file_type: cSource }
+      - libtommath/bn_mp_copy.c: { file_type: cSource }
+      - libtommath/bn_mp_neg.c: { file_type: cSource }
+      - libtommath/bn_mp_clear.c: { file_type: cSource }
+      - libtommath/bn_mp_init_copy.c: { file_type: cSource }
+      - libtommath/bn_mp_init.c: { file_type: cSource }
+      - libtommath/bn_mp_count_bits.c: { file_type: cSource }
+      - libtommath/bn_mp_ubin_size.c: { file_type: cSource }
+      - libtommath/bn_mp_cnt_lsb.c: { file_type: cSource }
+      - libtommath/bn_mp_get_l.c: { file_type: cSource }
       - gpiodpi.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_argchk.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_cfg.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_cipher.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_custom.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_hash.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_macros.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_math.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_misc.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_pk.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_pkcs.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_private.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_prng.h: { file_type: cppSource, is_include_file: true }
-      - tomcrypt_mac.h: { file_type: cppSource, is_include_file: true }
+      - headers/tomcrypt.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_argchk.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_cfg.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_cipher.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_custom.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_hash.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_macros.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_math.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_misc.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_pk.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_pkcs.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_private.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_prng.h: { file_type: cSource, is_include_file: true }
+      - headers/tomcrypt_mac.h: { file_type: cSource, is_include_file: true }
+      - libtommath/tommath.h: { file_type: cSource, is_include_file: true }
 
 
 targets:

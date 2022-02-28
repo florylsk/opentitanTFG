@@ -132,6 +132,7 @@
 #endif
 
 /* Enable self-test test vector checking */
+#define LTC_NO_TEST
 #ifndef LTC_NO_TEST
    #define LTC_TEST
 #endif
@@ -145,7 +146,7 @@
 /* #define LTC_CLEAN_STACK */
 
 /* disable all file related functions */
-/* #define LTC_NO_FILE */
+//#define LTC_NO_FILE */
 
 /* disable all forms of ASM */
 /* #define LTC_NO_ASM */
@@ -160,7 +161,7 @@
 #ifndef LTC_NO_MATH
 
 /* LibTomMath */
-/* #define LTM_DESC */
+#define LTM_DESC
 
 /* TomsFastMath */
 /* #define TFM_DESC */

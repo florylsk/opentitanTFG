@@ -539,8 +539,8 @@ typedef struct ltc_asn1_list_ {
       LTC_MACRO_list[LTC_MACRO_temp].size = (Size);  \
       LTC_MACRO_list[LTC_MACRO_temp].used = 0;       \
       LTC_MACRO_list[LTC_MACRO_temp].optional = 0;   \
-      LTC_MACRO_list[LTC_MACRO_temp].klass = 0;      \
-      LTC_MACRO_list[LTC_MACRO_temp].pc = 0;         \
+      LTC_MACRO_list[LTC_MACRO_temp].klass =(ltc_asn1_class) 0;      \
+      LTC_MACRO_list[LTC_MACRO_temp].pc =(ltc_asn1_pc) 0;         \
       LTC_MACRO_list[LTC_MACRO_temp].tag = 0;        \
    } while (0)
 
