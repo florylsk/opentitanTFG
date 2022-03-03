@@ -145,6 +145,17 @@ filesets:
       - tomfastmath/fp_sub_d.c: { file_type: cSource }
       - tomfastmath/fp_toradix_n.c: { file_type: cSource }
       - tomfastmath/ltc_ecc_points.c: { file_type: cSource }
+      - tomfastmath/crypt_prng_descriptor.c: { file_type: cSource }
+      - tomfastmath/fp_addmod.c: { file_type: cSource }
+      - tomfastmath/fp_gcd.c: { file_type: cSource }
+      - tomfastmath/fp_isprime.c: { file_type: cSource }
+      - tomfastmath/fp_isprime_ex.c: { file_type: cSource }
+      - tomfastmath/fp_lcm.c: { file_type: cSource }
+      - tomfastmath/fp_read_radix.c: { file_type: cSource }
+      - tomfastmath/fp_read_unsigned_bin.c: { file_type: cSource }
+      - tomfastmath/fp_sqr_comba_generic.c: { file_type: cSource }
+      - tomfastmath/fp_submod.c: { file_type: cSource }
+      - tomfastmath/fp_to_unsigned_bin.c: { file_type: cSource }
 
 
 targets:
