@@ -15,6 +15,7 @@ filesets:
       - rest/ltm_desc.c: { file_type: cSource }
       - rest/sha256.c: { file_type: cSource }
       - rest/rsa_verify_hash.c: { file_type: cSource }
+      - rest/ltc_ecc_fp_mulmod.c: { file_type: cSource }
       - der_decode/der_decode_sequence_ex.c: { file_type: cSource }
       - der_length/der_length_sequence.c: { file_type: cSource }
       - crypt/crypt_hash_descriptor.c: { file_type: cSource }
@@ -66,57 +67,6 @@ filesets:
       - crypt/crypt_sizes.c: { file_type: cSource }
       - rest/zeromem.c: { file_type: cSource }
       - rest/mem_neq.c: { file_type: cSource }
-      - libtommath/bn_deprecated.c: { file_type: cSource }
-      - libtommath/bn_mp_2expt.c: { file_type: cSource }
-      - libtommath/bn_mp_abs.c: { file_type: cSource }
-      - libtommath/bn_mp_add.c: { file_type: cSource }
-      - libtommath/bn_mp_addmod.c: { file_type: cSource }
-      - libtommath/bn_mp_and.c: { file_type: cSource }
-      - libtommath/bn_mp_clamp.c: { file_type: cSource }
-      - libtommath/bn_mp_clear.c: { file_type: cSource }
-      - libtommath/bn_mp_clear_multi.c: { file_type: cSource }
-      - libtommath/bn_mp_cmp.c: { file_type: cSource }
-      - libtommath/bn_mp_cmp_d.c: { file_type: cSource }
-      - libtommath/bn_mp_cmp_mag.c: { file_type: cSource }
-      - libtommath/bn_mp_cnt_lsb.c: { file_type: cSource }
-      - libtommath/bn_mp_complement.c: { file_type: cSource }
-      - libtommath/bn_mp_copy.c: { file_type: cSource }
-      - libtommath/bn_mp_count_bits.c: { file_type: cSource }
-      - libtommath/bn_mp_submod.c: { file_type: cSource }
-      - libtommath/bn_mp_exptmod.c: { file_type: cSource }
-      - libtommath/bn_mp_montgomery_reduce.c: { file_type: cSource }
-      - libtommath/bn_mp_montgomery_setup.c: { file_type: cSource }
-      - libtommath/bn_mp_invmod.c: { file_type: cSource }
-      - libtommath/bn_mp_sqrmod.c: { file_type: cSource }
-      - libtommath/bn_mp_mulmod.c: { file_type: cSource }
-      - libtommath/bn_mp_lcm.c: { file_type: cSource }
-      - libtommath/bn_mp_gcd.c: { file_type: cSource }
-      - libtommath/bn_mp_sqrmod_prime.c: { file_type: cSource }
-      - libtommath/bn_mp_mul.c: { file_type: cSource }
-      - libtommath/bn_mp_sub.c: { file_type: cSource }
-      - libtommath/bn_mp_rand.c: { file_type: cSource }
-      - libtommath/bn_mp_montgomery_calc_normalization.c: { file_type: cSource }
-      - libtommath/bn_mp_mod_d.c: { file_type: cSource }
-      - libtommath/bn_mp_div_2.c: { file_type: cSource }
-      - libtommath/bn_mp_div.c: { file_type: cSource }
-      - libtommath/bn_mp_sqr.c: { file_type: cSource }
-      - libtommath/bn_mp_mul_d.c: { file_type: cSource }
-      - libtommath/bn_mp_sub_d.c: { file_type: cSource }
-      - libtommath/bn_mp_add_d.c: { file_type: cSource }
-      - libtommath/bn_mp_to_radix.c: { file_type: cSource }
-      - libtommath/bn_mp_from_ubin.c: { file_type: cSource }
-      - libtommath/bn_mp_read_radix.c: { file_type: cSource }
-      - libtommath/bn_mp_2expt.c: { file_type: cSource }
-      - libtommath/bn_mp_set_u32.c: { file_type: cSource }
-      - libtommath/bn_mp_copy.c: { file_type: cSource }
-      - libtommath/bn_mp_neg.c: { file_type: cSource }
-      - libtommath/bn_mp_clear.c: { file_type: cSource }
-      - libtommath/bn_mp_init_copy.c: { file_type: cSource }
-      - libtommath/bn_mp_init.c: { file_type: cSource }
-      - libtommath/bn_mp_count_bits.c: { file_type: cSource }
-      - libtommath/bn_mp_ubin_size.c: { file_type: cSource }
-      - libtommath/bn_mp_cnt_lsb.c: { file_type: cSource }
-      - libtommath/bn_mp_get_l.c: { file_type: cSource }
       - gpiodpi.h: { file_type: cppSource, is_include_file: true }
       - headers/tomcrypt.h: { file_type: cSource, is_include_file: true }
       - headers/tomcrypt_argchk.h: { file_type: cSource, is_include_file: true }
@@ -132,7 +82,33 @@ filesets:
       - headers/tomcrypt_private.h: { file_type: cSource, is_include_file: true }
       - headers/tomcrypt_prng.h: { file_type: cSource, is_include_file: true }
       - headers/tomcrypt_mac.h: { file_type: cSource, is_include_file: true }
-      - libtommath/tommath.h: { file_type: cSource, is_include_file: true }
+      - tomfastmath/tfm.h: { file_type: cSource, is_include_file: true }
+      - tomfastmath/tfm_private.h: { file_type: cSource, is_include_file: true }
+      - tomfastmath/tfm_desc.c: { file_type: cSource }
+      - tomfastmath/fp_add.c: { file_type: cSource }
+      - tomfastmath/fp_cmp.c: { file_type: cSource }
+      - tomfastmath/fp_cmp_d.c: { file_type: cSource }
+      - tomfastmath/fp_cnt_lsb.c: { file_type: cSource }
+      - tomfastmath/fp_count_bits.c: { file_type: cSource }
+      - tomfastmath/fp_div.c: { file_type: cSource }
+      - tomfastmath/fp_exptmod.c: { file_type: cSource }
+      - tomfastmath/fp_invmod.c: { file_type: cSource }
+      - tomfastmath/fp_montgomery_reduce.c: { file_type: cSource }
+      - tomfastmath/fp_montgomery_setup.c: { file_type: cSource }
+      - tomfastmath/fp_mul.c: { file_type: cSource }
+      - tomfastmath/fp_mulmod.c: { file_type: cSource }
+      - tomfastmath/fp_rand.c: { file_type: cSource }
+      - tomfastmath/fp_sqr.c: { file_type: cSource }
+      - tomfastmath/fp_sqrmod.c: { file_type: cSource }
+      - tomfastmath/fp_sub.c: { file_type: cSource }
+      - tomfastmath/fp_toradix.c: { file_type: cSource }
+      - tomfastmath/fp_unsigned_bin_size.c: { file_type: cSource }
+      - tomfastmath/ltc_ecc_is_point_at_infinity.c: { file_type: cSource }
+      - tomfastmath/ltc_ecc_map.c: { file_type: cSource }
+      - tomfastmath/ltc_ecc_mul2add.c: { file_type: cSource }
+      - tomfastmath/ltc_ecc_mulmod.c: { file_type: cSource }
+      - tomfastmath/rsa_exptmod.c: { file_type: cSource }
+      - tomfastmath/rsa_make_key.c: { file_type: cSource }
 
 
 targets:
