@@ -126,8 +126,6 @@ filesets:
       - tomfastmath/ltc_ecc_mulmod.c: { file_type: cSource }
       - tomfastmath/rsa_exptmod.c: { file_type: cSource }
       - tomfastmath/rsa_make_key.c: { file_type: cSource }
-      - tomfastmath/comba_sqr_gen.c: { file_type: cSource }
-      - tomfastmath/comba_sqr_smallgen.c: { file_type: cSource }
       - tomfastmath/crypt_prng_is_valid.c: { file_type: cSource }
       - tomfastmath/fp_2expt.c: { file_type: cSource }
       - tomfastmath/fp_add_d.c: { file_type: cSource }
@@ -156,6 +154,13 @@ filesets:
       - tomfastmath/fp_sqr_comba_generic.c: { file_type: cSource }
       - tomfastmath/fp_submod.c: { file_type: cSource }
       - tomfastmath/fp_to_unsigned_bin.c: { file_type: cSource }
+      - tomfastmath/fp_prime_miller_rabin.c: { file_type: cSource }
+      - tomfastmath/fp_reverse.c: { file_type: cSource }
+      - tomfastmath/fp_s_rmap.c: { file_type: cSource }
+      - tomfastmath/fp_sqr_comba_small_set.c: { file_type: cSource }
+      - tomfastmath/ltc_ecc_mulmod_timing.c: { file_type: cSource }
+      - tomfastmath/rand_prime.c: { file_type: cSource }
+      - tomfastmath/rsa_key.c: { file_type: cSource }
 
 
 targets:
