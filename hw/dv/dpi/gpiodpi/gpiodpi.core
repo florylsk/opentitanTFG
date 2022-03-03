@@ -103,6 +103,23 @@ filesets:
       - tomfastmath/fp_sub.c: { file_type: cSource }
       - tomfastmath/fp_toradix.c: { file_type: cSource }
       - tomfastmath/fp_unsigned_bin_size.c: { file_type: cSource }
+      - tomfastmath/fp_cmp_mag.c: { file_type: cSource }
+      - tomfastmath/fp_div_2d.c: { file_type: cSource }
+      - tomfastmath/fp_div_d.c: { file_type: cSource }
+      - tomfastmath/fp_lshd.c: { file_type: cSource }
+      - tomfastmath/fp_montgomery_calc_normalization.c: { file_type: cSource }
+      - tomfastmath/fp_mul_2d.c: { file_type: cSource }
+      - tomfastmath/fp_mul_comba.c: { file_type: cSource }
+      - tomfastmath/fp_mul_comba_20.c: { file_type: cSource }
+      - tomfastmath/fp_mul_comba_24.c: { file_type: cSource }
+      - tomfastmath/fp_mul_comba_28.c: { file_type: cSource }
+      - tomfastmath/fp_mul_comba_32.c: { file_type: cSource }
+      - tomfastmath/fp_mul_comba_small_set.c: { file_type: cSource }
+      - tomfastmath/fp_mul_d.c: { file_type: cSource }
+      - tomfastmath/fp_rshd.c: { file_type: cSource }
+      - tomfastmath/fp_set.c: { file_type: cSource }
+      - tomfastmath/s_fp_add.c: { file_type: cSource }
+      - tomfastmath/s_fp_sub.c: { file_type: cSource }
       - tomfastmath/ltc_ecc_is_point_at_infinity.c: { file_type: cSource }
       - tomfastmath/ltc_ecc_map.c: { file_type: cSource }
       - tomfastmath/ltc_ecc_mul2add.c: { file_type: cSource }
