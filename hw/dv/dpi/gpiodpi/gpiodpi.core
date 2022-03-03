@@ -126,6 +126,25 @@ filesets:
       - tomfastmath/ltc_ecc_mulmod.c: { file_type: cSource }
       - tomfastmath/rsa_exptmod.c: { file_type: cSource }
       - tomfastmath/rsa_make_key.c: { file_type: cSource }
+      - tomfastmath/comba_sqr_gen.c: { file_type: cSource }
+      - tomfastmath/comba_sqr_smallgen.c: { file_type: cSource }
+      - tomfastmath/crypt_prng_is_valid.c: { file_type: cSource }
+      - tomfastmath/fp_2expt.c: { file_type: cSource }
+      - tomfastmath/fp_add_d.c: { file_type: cSource }
+      - tomfastmath/fp_div_2.c: { file_type: cSource }
+      - tomfastmath/fp_mod.c: { file_type: cSource }
+      - tomfastmath/fp_mod_2d.c: { file_type: cSource }
+      - tomfastmath/fp_mod_d.c: { file_type: cSource }
+      - tomfastmath/fp_mul_2.c: { file_type: cSource }
+      - tomfastmath/fp_prime_random_ex.c: { file_type: cSource }
+      - tomfastmath/fp_sqr_comba.c: { file_type: cSource }
+      - tomfastmath/fp_sqr_comba_20.c: { file_type: cSource }
+      - tomfastmath/fp_sqr_comba_24.c: { file_type: cSource }
+      - tomfastmath/fp_sqr_comba_28.c: { file_type: cSource }
+      - tomfastmath/fp_sqr_comba_32.c: { file_type: cSource }
+      - tomfastmath/fp_sub_d.c: { file_type: cSource }
+      - tomfastmath/fp_toradix_n.c: { file_type: cSource }
+      - tomfastmath/ltc_ecc_points.c: { file_type: cSource }
 
 
 targets:
