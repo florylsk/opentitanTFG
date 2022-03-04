@@ -65,6 +65,29 @@ filesets:
       - crypt/crypt_argchk.c: { file_type: cSource }
       - crypt/crypt_constants.c: { file_type: cSource }
       - crypt/crypt_sizes.c: { file_type: cSource }
+      - crypt/crypt_cipher_descriptor.c: { file_type: cSource }
+      - crypt/crypt_cipher_is_valid.c: { file_type: cSource }
+      - crypt/crypt_find_cipher.c: { file_type: cSource }
+      - crypt/crypt_find_cipher_any.c: { file_type: cSource }
+      - crypt/crypt_find_cipher_id.c: { file_type: cSource }
+      - crypt/crypt_find_hash_any.c: { file_type: cSource }
+      - crypt/crypt_find_hash_id.c: { file_type: cSource }
+      - crypt/crypt_find_hash_oid.c: { file_type: cSource }
+      - crypt/crypt_find_prng.c: { file_type: cSource }
+      - crypt/crypt_fsa.c: { file_type: cSource }
+      - crypt/crypt_ltc_mp_descriptor.c: { file_type: cSource }
+      - crypt/crypt_prng_descriptor.c: { file_type: cSource }
+      - crypt/crypt_prng_is_valid.c: { file_type: cSource }
+      - crypt/crypt_prng_rng_descriptor.c: { file_type: cSource }
+      - crypt/crypt_register_all_ciphers.c: { file_type: cSource }
+      - crypt/crypt_register_all_hashes.c: { file_type: cSource }
+      - crypt/crypt_register_all_prngs.c: { file_type: cSource }
+      - crypt/crypt_register_cipher.c: { file_type: cSource }
+      - crypt/crypt_register_hash.c: { file_type: cSource }
+      - crypt/crypt_register_prng.c: { file_type: cSource }
+      - crypt/crypt_unregister_cipher.c: { file_type: cSource }
+      - crypt/crypt_unregister_hash.c: { file_type: cSource }
+      - crypt/crypt_unregister_prng.c: { file_type: cSource }
       - rest/zeromem.c: { file_type: cSource }
       - rest/mem_neq.c: { file_type: cSource }
       - gpiodpi.h: { file_type: cppSource, is_include_file: true }
@@ -126,7 +149,6 @@ filesets:
       - tomfastmath/ltc_ecc_mulmod.c: { file_type: cSource }
       - tomfastmath/rsa_exptmod.c: { file_type: cSource }
       - tomfastmath/rsa_make_key.c: { file_type: cSource }
-      - tomfastmath/crypt_prng_is_valid.c: { file_type: cSource }
       - tomfastmath/fp_2expt.c: { file_type: cSource }
       - tomfastmath/fp_add_d.c: { file_type: cSource }
       - tomfastmath/fp_div_2.c: { file_type: cSource }
@@ -143,7 +165,6 @@ filesets:
       - tomfastmath/fp_sub_d.c: { file_type: cSource }
       - tomfastmath/fp_toradix_n.c: { file_type: cSource }
       - tomfastmath/ltc_ecc_points.c: { file_type: cSource }
-      - tomfastmath/crypt_prng_descriptor.c: { file_type: cSource }
       - tomfastmath/fp_addmod.c: { file_type: cSource }
       - tomfastmath/fp_gcd.c: { file_type: cSource }
       - tomfastmath/fp_isprime.c: { file_type: cSource }

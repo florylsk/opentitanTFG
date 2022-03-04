@@ -158,7 +158,7 @@
 /* #define LTC_NO_BSWAP */
 
 /* ---> math provider? <--- */
-#ifndef LTC_NO_MATH
+//#ifndef LTC_NO_MATH
 
 /* LibTomMath */
 //#define LTM_DESC
@@ -169,7 +169,7 @@
 /* GNU Multiple Precision Arithmetic Library */
 /* #define GMP_DESC */
 
-#endif /* LTC_NO_MATH */
+//#endif /* LTC_NO_MATH */
 
 /* ---> Symmetric Block Ciphers <--- */
 #ifndef LTC_NO_CIPHERS

@@ -510,9 +510,9 @@ void ltc_cleanup_multi(void **a, ...);
 extern const ltc_math_descriptor ltm_desc;
 #endif
 
-#ifdef TFM_DESC
+//#ifdef TFM_DESC
 extern const ltc_math_descriptor tfm_desc;
-#endif
+//#endif
 
 #ifdef GMP_DESC
 extern const ltc_math_descriptor gmp_desc;
