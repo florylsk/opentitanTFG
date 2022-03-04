@@ -14,7 +14,6 @@ filesets:
       - rest/radix_to_bin.c: { file_type: cSource }
       - rest/ltm_desc.c: { file_type: cSource }
       - rest/sha256.c: { file_type: cSource }
-      - rest/rsa_verify_hash.c: { file_type: cSource }
       - rest/ltc_ecc_fp_mulmod.c: { file_type: cSource }
       - der_decode/der_decode_sequence_ex.c: { file_type: cSource }
       - der_length/der_length_sequence.c: { file_type: cSource }
@@ -147,8 +146,6 @@ filesets:
       - tomfastmath/ltc_ecc_map.c: { file_type: cSource }
       - tomfastmath/ltc_ecc_mul2add.c: { file_type: cSource }
       - tomfastmath/ltc_ecc_mulmod.c: { file_type: cSource }
-      - tomfastmath/rsa_exptmod.c: { file_type: cSource }
-      - tomfastmath/rsa_make_key.c: { file_type: cSource }
       - tomfastmath/fp_2expt.c: { file_type: cSource }
       - tomfastmath/fp_add_d.c: { file_type: cSource }
       - tomfastmath/fp_div_2.c: { file_type: cSource }
@@ -181,7 +178,6 @@ filesets:
       - tomfastmath/fp_sqr_comba_small_set.c: { file_type: cSource }
       - tomfastmath/ltc_ecc_mulmod_timing.c: { file_type: cSource }
       - tomfastmath/rand_prime.c: { file_type: cSource }
-      - tomfastmath/rsa_key.c: { file_type: cSource }
       - ciphers_and_hashes/aes.c: { file_type: cSource }
       - ciphers_and_hashes/aes_tab.c: { file_type: cSource }
       - ciphers_and_hashes/anubis.c: { file_type: cSource }
@@ -213,6 +209,7 @@ filesets:
       - ciphers_and_hashes/serpent.c: { file_type: cSource }
       - ciphers_and_hashes/sha1.c: { file_type: cSource }
       - ciphers_and_hashes/sha3.c: { file_type: cSource }
+      - ciphers_and_hashes/sha3_test.c: { file_type: cSource }
       - ciphers_and_hashes/sha224.c: { file_type: cSource }
       - ciphers_and_hashes/sha256.c: { file_type: cSource }
       - ciphers_and_hashes/sha384.c: { file_type: cSource }
@@ -225,6 +222,32 @@ filesets:
       - ciphers_and_hashes/twofish.c: { file_type: cSource }
       - ciphers_and_hashes/twofish_tab.c: { file_type: cSource }
       - ciphers_and_hashes/xtea.c: { file_type: cSource }
+      - ciphers_and_hashes/chacha20.c: { file_type: cSource }
+      - ciphers_and_hashes/fortuna.c: { file_type: cSource }
+      - ciphers_and_hashes/rc4.c: { file_type: cSource }
+      - ciphers_and_hashes/rng_get_bytes.c: { file_type: cSource }
+      - ciphers_and_hashes/rng_make_prng.c: { file_type: cSource }
+      - ciphers_and_hashes/sober128.c: { file_type: cSource }
+      - ciphers_and_hashes/sprng.c: { file_type: cSource }
+      - ciphers_and_hashes/yarrow.c: { file_type: cSource }
+      - ciphers_and_hashes/whirl.c: { file_type: cSource }
+      - ciphers_and_hashes/whirltab.c: { file_type: cSource }
+      - rest/compare_testvector.c: { file_type: cSource }
+      - rsa/rsa_verify_hash.c: { file_type: cSource }
+      - rsa/rsa_key.c: { file_type: cSource }
+      - rsa/rsa_exptmod.c: { file_type: cSource }
+      - rsa/rsa_make_key.c: { file_type: cSource }
+      - rsa/rsa_decrypt_key.c: { file_type: cSource }
+      - rsa/rsa_encrypt_key.c: { file_type: cSource }
+      - rsa/rsa_export.c: { file_type: cSource }
+      - rsa/rsa_get_size.c: { file_type: cSource }
+      - rsa/rsa_import.c: { file_type: cSource }
+      - rsa/rsa_import_pkcs8.c: { file_type: cSource }
+      - rsa/rsa_import_x509.c: { file_type: cSource }
+      - rsa/rsa_make_set.c: { file_type: cSource }
+      - rsa/rsa_make_sign_hash.c: { file_type: cSource }
+      - rsa/rsa_make_sign_saltlen_get.c: { file_type: cSource }
+
 
 
 targets:
