@@ -54,9 +54,12 @@ filesets:
       - der_decode/der_decode_utctime.c: { file_type: cSource }
       - der_decode/der_decode_generalizedtime.c: { file_type: cSource }
       - der_decode/der_decode_choice.c: { file_type: cSource }
-      - rest/der_encode_asn1_identifier.c: { file_type: cSource }
+      - der_decode/der_decode_sequence_multi.c: { file_type: cSource }
+      - der_encode/der_encode_asn1_identifier.c: { file_type: cSource }
       - der_decode/der_decode_asn1_identifier.c: { file_type: cSource }
-      - rest/der_encode_asn1_length.c: { file_type: cSource }
+      - der_encode/der_encode_asn1_length.c: { file_type: cSource }
+      - der_encode/der_encode_sequence_ex.c: { file_type: cSource }
+      - der_encode/der_encode_sequence_multi.c: { file_type: cSource }
       - der_length/der_length_asn1_identifier.c: { file_type: cSource }
       - pkcs1/pkcs_1_mgf1.c: { file_type: cSource }
       - crypt/crypt_find_hash.c: { file_type: cSource }
@@ -243,6 +246,9 @@ filesets:
       - ciphers_and_hashes/sober128_stream.c: { file_type: cSource }
       - ciphers_and_hashes/sober128_stream_memory.c: { file_type: cSource }
       - ciphers_and_hashes/sober128tab.c: { file_type: cSource }
+      - ciphers_and_hashes/chacha_crypt.c: { file_type: cSource }
+      - ciphers_and_hashes/chacha_done.c: { file_type: cSource }
+      - ciphers_and_hashes/chc.c: { file_type: cSource }
       - rest/compare_testvector.c: { file_type: cSource }
       - rsa/rsa_verify_hash.c: { file_type: cSource }
       - rsa/rsa_key.c: { file_type: cSource }
@@ -258,6 +264,18 @@ filesets:
       - rsa/rsa_set.c: { file_type: cSource }
       - rsa/rsa_sign_hash.c: { file_type: cSource }
       - rsa/rsa_sign_saltlen_get.c: { file_type: cSource }
+      - rsa/der_sequence_free.c: { file_type: cSource }
+      - rsa/pk_oid_cmp.c: { file_type: cSource }
+      - rsa/pkcs8_decode_flexi.c: { file_type: cSource }
+      - rsa/pkcs_1_oaep_decode.c: { file_type: cSource }
+      - rsa/pkcs_1_oaep_encode.c: { file_type: cSource }
+      - rsa/pkcs_1_pss_decode.c: { file_type: cSource }
+      - rsa/pkcs_1_pss_encode.c: { file_type: cSource }
+      - rsa/pkcs_1_v1_5_decode.c: { file_type: cSource }
+      - rsa/pkcs_1_v1_5_encode.c: { file_type: cSource }
+      - rsa/x509_decode_public_key_from_certificate.c: { file_type: cSource }
+      - rsa/x509_decode_subject_public_key_info.c: { file_type: cSource }
+      - rsa/x509_encode_subject_public_key_info.c: { file_type: cSource }
 
 
 
