@@ -41,6 +41,7 @@ filesets:
       - der_decode/der_decode_sequence_ex.c: { file_type: cSource }
       - rest/der_asn1_maps.c: { file_type: cSource }
       - der_decode/der_decode_boolean.c: { file_type: cSource }
+      - der_decode/der_decode_sequence_flexi.c: { file_type: cSource }
       - der_decode/der_decode_integer.c: { file_type: cSource }
       - der_decode/der_decode_short_integer.c: { file_type: cSource }
       - der_decode/der_decode_bit_string.c: { file_type: cSource }
@@ -60,6 +61,20 @@ filesets:
       - der_encode/der_encode_asn1_length.c: { file_type: cSource }
       - der_encode/der_encode_sequence_ex.c: { file_type: cSource }
       - der_encode/der_encode_sequence_multi.c: { file_type: cSource }
+      - der_encode/der_encode_bit_string.c: { file_type: cSource }
+      - der_encode/der_encode_custom_type.c: { file_type: cSource }
+      - der_encode/der_encode_generalizedtime.c: { file_type: cSource }
+      - der_encode/der_encode_ia5_string.c: { file_type: cSource }
+      - der_encode/der_encode_integer.c: { file_type: cSource }
+      - der_encode/der_encode_object_identifier.c: { file_type: cSource }
+      - der_encode/der_encode_octet_string.c: { file_type: cSource }
+      - der_encode/der_encode_printable_string.c: { file_type: cSource }
+      - der_encode/der_encode_raw_bit_string.c: { file_type: cSource }
+      - der_encode/der_encode_set.c: { file_type: cSource }
+      - der_encode/der_encode_setof.c: { file_type: cSource }
+      - der_encode/der_encode_short_integer.c: { file_type: cSource }
+      - der_encode/der_encode_utctime.c: { file_type: cSource }
+      - der_encode/der_encode_utf8_string.c: { file_type: cSource }
       - der_length/der_length_asn1_identifier.c: { file_type: cSource }
       - pkcs1/pkcs_1_mgf1.c: { file_type: cSource }
       - crypt/crypt_find_hash.c: { file_type: cSource }
@@ -92,6 +107,9 @@ filesets:
       - crypt/crypt_unregister_prng.c: { file_type: cSource }
       - rest/zeromem.c: { file_type: cSource }
       - rest/mem_neq.c: { file_type: cSource }
+      - rest/pbes.c: { file_type: cSource }
+      - rest/pbes1.c: { file_type: cSource }
+      - rest/pbes2.c: { file_type: cSource }
       - gpiodpi.h: { file_type: cppSource, is_include_file: true }
       - headers/tomcrypt.h: { file_type: cSource, is_include_file: true }
       - headers/tomcrypt_argchk.h: { file_type: cSource, is_include_file: true }
@@ -276,6 +294,8 @@ filesets:
       - rsa/x509_decode_public_key_from_certificate.c: { file_type: cSource }
       - rsa/x509_decode_subject_public_key_info.c: { file_type: cSource }
       - rsa/x509_encode_subject_public_key_info.c: { file_type: cSource }
+      - rsa/pk_get_oid.c: { file_type: cSource }
+      - rsa/pk_oid_str.c: { file_type: cSource }
 
 
 
