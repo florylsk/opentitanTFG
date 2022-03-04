@@ -15,6 +15,7 @@ filesets:
       - rest/ltm_desc.c: { file_type: cSource }
       - rest/sha256.c: { file_type: cSource }
       - rest/ltc_ecc_fp_mulmod.c: { file_type: cSource }
+      - rest/padding_depad.c: { file_type: cSource }
       - der_decode/der_decode_sequence_ex.c: { file_type: cSource }
       - der_length/der_length_sequence.c: { file_type: cSource }
       - crypt/crypt_hash_descriptor.c: { file_type: cSource }
@@ -75,6 +76,7 @@ filesets:
       - der_encode/der_encode_short_integer.c: { file_type: cSource }
       - der_encode/der_encode_utctime.c: { file_type: cSource }
       - der_encode/der_encode_utf8_string.c: { file_type: cSource }
+      - der_encode/der_encode_boolean.c: { file_type: cSource }
       - der_length/der_length_asn1_identifier.c: { file_type: cSource }
       - pkcs1/pkcs_1_mgf1.c: { file_type: cSource }
       - crypt/crypt_find_hash.c: { file_type: cSource }
@@ -267,6 +269,22 @@ filesets:
       - ciphers_and_hashes/chacha_crypt.c: { file_type: cSource }
       - ciphers_and_hashes/chacha_done.c: { file_type: cSource }
       - ciphers_and_hashes/chc.c: { file_type: cSource }
+      - ciphers_and_hashes/hash_file.c: { file_type: cSource }
+      - ciphers_and_hashes/hash_filehandle.c: { file_type: cSource }
+      - ciphers_and_hashes/hash_memory.c: { file_type: cSource }
+      - ciphers_and_hashes/hash_memory_multi.c: { file_type: cSource }
+      - cbc/cbc_decrypt.c: { file_type: cSource }
+      - cbc/cbc_done.c: { file_type: cSource }
+      - cbc/cbc_encrypt.c: { file_type: cSource }
+      - cbc/cbc_getiv.c: { file_type: cSource }
+      - cbc/cbc_setiv.c: { file_type: cSource }
+      - cbc/cbc_start.c: { file_type: cSource }
+      - hmac/hmac_done.c: { file_type: cSource }
+      - hmac/hmac_file.c: { file_type: cSource }
+      - hmac/hmac_init.c: { file_type: cSource }
+      - hmac/hmac_memory.c: { file_type: cSource }
+      - hmac/hmac_memory_multi.c: { file_type: cSource }
+      - hmac/hmac_process.c: { file_type: cSource }
       - rest/compare_testvector.c: { file_type: cSource }
       - rsa/rsa_verify_hash.c: { file_type: cSource }
       - rsa/rsa_key.c: { file_type: cSource }
@@ -296,6 +314,10 @@ filesets:
       - rsa/x509_encode_subject_public_key_info.c: { file_type: cSource }
       - rsa/pk_get_oid.c: { file_type: cSource }
       - rsa/pk_oid_str.c: { file_type: cSource }
+      - rsa/pkcs12_kdf.c: { file_type: cSource }
+      - rsa/pkcs12_utf8_to_utf16.c: { file_type: cSource }
+      - rsa/pkcs_5_1.c: { file_type: cSource }
+      - rsa/pkcs_5_2.c: { file_type: cSource }
 
 
 
