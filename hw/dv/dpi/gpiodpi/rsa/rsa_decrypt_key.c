@@ -65,7 +65,7 @@ int rsa_decrypt_key_ex(const unsigned char *in,             unsigned long  inlen
   }
 
   /* allocate ram */
-  tmp = XMALLOC(inlen);
+  tmp = (unsigned char*)XMALLOC(inlen);
   if (tmp == NULL) {
      return CRYPT_MEM;
   }

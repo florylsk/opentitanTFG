@@ -66,10 +66,10 @@ int rsa_import_pkcs8(const unsigned char *in, unsigned long inlen,
 
    /* alloc buffers */
    buf1len = inlen; /* approx. */
-   buf1 = XMALLOC(buf1len);
+   buf1 = (unsigned char*)XMALLOC(buf1len);
    if (buf1 == NULL) { err = CRYPT_MEM; goto LBL_NOFREE; }
    buf2len = inlen; /* approx. */
-   buf2 = XMALLOC(buf2len);
+   buf2 = (unsigned char*)XMALLOC(buf2len);
    if (buf2 == NULL) { err = CRYPT_MEM; goto LBL_FREE1; }
 
    if ((err = mp_init_multi(&zero, &iter, NULL)) != CRYPT_OK) { goto LBL_FREE2; }
@@ -80,7 +80,7 @@ int rsa_import_pkcs8(const unsigned char *in, unsigned long inlen,
    if ((err = pkcs8_decode_flexi(in, inlen, passwd, passwdlen, &l)) != CRYPT_OK) {
       goto LBL_ERR;
    }
-   decrypted    = l->data;
+   decrypted    = (unsigned char*)l->data;
    decryptedlen = l->size;
 
    /* try to decode unencrypted priv key */

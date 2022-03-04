@@ -57,7 +57,7 @@ int rsa_export(unsigned char *out, unsigned long *outlen, int type, const rsa_ke
 
       if (std) {
           tmplen = (unsigned long)(mp_count_bits(key->N) / 8) * 2 + 8;
-          tmp = XMALLOC(tmplen);
+          tmp = (unsigned char*)XMALLOC(tmplen);
           ptmplen = &tmplen;
           if (tmp == NULL) {
               return CRYPT_MEM;

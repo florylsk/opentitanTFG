@@ -232,6 +232,17 @@ filesets:
       - ciphers_and_hashes/yarrow.c: { file_type: cSource }
       - ciphers_and_hashes/whirl.c: { file_type: cSource }
       - ciphers_and_hashes/whirltab.c: { file_type: cSource }
+      - ciphers_and_hashes/chacha_ivctr64.c: { file_type: cSource }
+      - ciphers_and_hashes/chacha_keystream.c: { file_type: cSource }
+      - ciphers_and_hashes/chacha_setup.c: { file_type: cSource }
+      - ciphers_and_hashes/ctr_done.c: { file_type: cSource }
+      - ciphers_and_hashes/ctr_encrypt.c: { file_type: cSource }
+      - ciphers_and_hashes/ctr_start.c: { file_type: cSource }
+      - ciphers_and_hashes/rc4_stream.c: { file_type: cSource }
+      - ciphers_and_hashes/rc4_stream_memory.c: { file_type: cSource }
+      - ciphers_and_hashes/sober128_stream.c: { file_type: cSource }
+      - ciphers_and_hashes/sober128_stream_memory.c: { file_type: cSource }
+      - ciphers_and_hashes/sober128tab.c: { file_type: cSource }
       - rest/compare_testvector.c: { file_type: cSource }
       - rsa/rsa_verify_hash.c: { file_type: cSource }
       - rsa/rsa_key.c: { file_type: cSource }
@@ -244,9 +255,9 @@ filesets:
       - rsa/rsa_import.c: { file_type: cSource }
       - rsa/rsa_import_pkcs8.c: { file_type: cSource }
       - rsa/rsa_import_x509.c: { file_type: cSource }
-      - rsa/rsa_make_set.c: { file_type: cSource }
-      - rsa/rsa_make_sign_hash.c: { file_type: cSource }
-      - rsa/rsa_make_sign_saltlen_get.c: { file_type: cSource }
+      - rsa/rsa_set.c: { file_type: cSource }
+      - rsa/rsa_sign_hash.c: { file_type: cSource }
+      - rsa/rsa_sign_saltlen_get.c: { file_type: cSource }
 
 
 

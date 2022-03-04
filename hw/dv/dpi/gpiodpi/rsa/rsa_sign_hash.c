@@ -102,7 +102,7 @@ int rsa_sign_hash_ex(const unsigned char *in,       unsigned long  inlen,
 
       /* allocate memory for the encoding */
       y = mp_unsigned_bin_size(key->N);
-      tmpin = XMALLOC(y);
+      tmpin = (unsigned char*)XMALLOC(y);
       if (tmpin == NULL) {
          return CRYPT_MEM;
       }
