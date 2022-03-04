@@ -182,6 +182,49 @@ filesets:
       - tomfastmath/ltc_ecc_mulmod_timing.c: { file_type: cSource }
       - tomfastmath/rand_prime.c: { file_type: cSource }
       - tomfastmath/rsa_key.c: { file_type: cSource }
+      - ciphers_and_hashes/aes.c: { file_type: cSource }
+      - ciphers_and_hashes/aes_tab.c: { file_type: cSource }
+      - ciphers_and_hashes/anubis.c: { file_type: cSource }
+      - ciphers_and_hashes/blake2b.c: { file_type: cSource }
+      - ciphers_and_hashes/blake2s.c: { file_type: cSource }
+      - ciphers_and_hashes/blowfish.c: { file_type: cSource }
+      - ciphers_and_hashes/camellia.c: { file_type: cSource }
+      - ciphers_and_hashes/cast5.c: { file_type: cSource }
+      - ciphers_and_hashes/des.c: { file_type: cSource }
+      - ciphers_and_hashes/idea.c: { file_type: cSource }
+      - ciphers_and_hashes/kasumi.c: { file_type: cSource }
+      - ciphers_and_hashes/khazad.c: { file_type: cSource }
+      - ciphers_and_hashes/kseed.c: { file_type: cSource }
+      - ciphers_and_hashes/md2.c: { file_type: cSource }
+      - ciphers_and_hashes/md4.c: { file_type: cSource }
+      - ciphers_and_hashes/md5.c: { file_type: cSource }
+      - ciphers_and_hashes/multi2.c: { file_type: cSource }
+      - ciphers_and_hashes/noekeon.c: { file_type: cSource }
+      - ciphers_and_hashes/rc2.c: { file_type: cSource }
+      - ciphers_and_hashes/rc5.c: { file_type: cSource }
+      - ciphers_and_hashes/rc6.c: { file_type: cSource }
+      - ciphers_and_hashes/rmd128.c: { file_type: cSource }
+      - ciphers_and_hashes/rmd160.c: { file_type: cSource }
+      - ciphers_and_hashes/rmd256.c: { file_type: cSource }
+      - ciphers_and_hashes/rmd320.c: { file_type: cSource }
+      - ciphers_and_hashes/safer.c: { file_type: cSource }
+      - ciphers_and_hashes/safer_tab.c: { file_type: cSource }
+      - ciphers_and_hashes/saferp.c: { file_type: cSource }
+      - ciphers_and_hashes/serpent.c: { file_type: cSource }
+      - ciphers_and_hashes/sha1.c: { file_type: cSource }
+      - ciphers_and_hashes/sha3.c: { file_type: cSource }
+      - ciphers_and_hashes/sha224.c: { file_type: cSource }
+      - ciphers_and_hashes/sha256.c: { file_type: cSource }
+      - ciphers_and_hashes/sha384.c: { file_type: cSource }
+      - ciphers_and_hashes/sha512.c: { file_type: cSource }
+      - ciphers_and_hashes/sha512_224.c: { file_type: cSource }
+      - ciphers_and_hashes/sha512_256.c: { file_type: cSource }
+      - ciphers_and_hashes/skipjack.c: { file_type: cSource }
+      - ciphers_and_hashes/tea.c: { file_type: cSource }
+      - ciphers_and_hashes/tiger.c: { file_type: cSource }
+      - ciphers_and_hashes/twofish.c: { file_type: cSource }
+      - ciphers_and_hashes/twofish_tab.c: { file_type: cSource }
+      - ciphers_and_hashes/xtea.c: { file_type: cSource }
 
 
 targets:
