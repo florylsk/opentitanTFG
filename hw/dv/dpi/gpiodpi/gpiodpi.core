@@ -13,15 +13,12 @@ filesets:
       - rest/multi.c: { file_type: cSource }
       - rest/radix_to_bin.c: { file_type: cSource }
       - rest/ltm_desc.c: { file_type: cSource }
-      - rest/sha256.c: { file_type: cSource }
       - rest/ltc_ecc_fp_mulmod.c: { file_type: cSource }
       - rest/padding_depad.c: { file_type: cSource }
       - der_decode/der_decode_sequence_ex.c: { file_type: cSource }
       - der_length/der_length_sequence.c: { file_type: cSource }
       - crypt/crypt_hash_descriptor.c: { file_type: cSource }
       - crypt/crypt_hash_is_valid.c: { file_type: cSource }
-      - pkcs1/pkcs_1_pss_decode.c: { file_type: cSource }
-      - pkcs1/pkcs_1_v1_5_decode.c: { file_type: cSource }
       - der_length/der_length_asn1_length.c: { file_type: cSource }
       - der_length/der_length_bit_string.c: { file_type: cSource }
       - der_length/der_length_boolean.c: { file_type: cSource }
@@ -79,6 +76,7 @@ filesets:
       - der_encode/der_encode_boolean.c: { file_type: cSource }
       - der_length/der_length_asn1_identifier.c: { file_type: cSource }
       - pkcs1/pkcs_1_mgf1.c: { file_type: cSource }
+      - crypt/crypt.c: { file_type: cSource }
       - crypt/crypt_find_hash.c: { file_type: cSource }
       - crypt/crypt_inits.c: { file_type: cSource }
       - crypt/crypt_argchk.c: { file_type: cSource }
@@ -112,6 +110,10 @@ filesets:
       - rest/pbes.c: { file_type: cSource }
       - rest/pbes1.c: { file_type: cSource }
       - rest/pbes2.c: { file_type: cSource }
+      - rest/base64_decode.c: { file_type: cSource }
+      - rest/base64_encode.c: { file_type: cSource }
+      - rest/ltc_ecc_projective_add_point.c: { file_type: cSource }
+      - rest/ltc_ecc_projective_dbl_point.c: { file_type: cSource }
       - gpiodpi.h: { file_type: cppSource, is_include_file: true }
       - headers/tomcrypt.h: { file_type: cSource, is_include_file: true }
       - headers/tomcrypt_argchk.h: { file_type: cSource, is_include_file: true }

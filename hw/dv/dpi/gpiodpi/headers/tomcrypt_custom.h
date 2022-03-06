@@ -60,7 +60,7 @@
       && !defined(LTC_NO_PROTOTYPES)
 #define LTC_NO_PROTOTYPES
 #endif
-
+#define LTC_EASY //////////////////////////////////////////////////////
 /* shortcut to disable automatic inclusion */
 #if defined LTC_NOTHING && !defined LTC_EASY
   #define LTC_NO_CIPHERS
@@ -75,18 +75,18 @@
 
 /* Easy button? */
 #ifdef LTC_EASY
-   #define LTC_NO_CIPHERS
+   //#define LTC_NO_CIPHERS
    #define LTC_RIJNDAEL
    #define LTC_BLOWFISH
    #define LTC_DES
    #define LTC_CAST5
 
-   #define LTC_NO_MODES
+   //#define LTC_NO_MODES
    #define LTC_ECB_MODE
    #define LTC_CBC_MODE
    #define LTC_CTR_MODE
 
-   #define LTC_NO_HASHES
+   //#define LTC_NO_HASHES
    #define LTC_SHA1
    #define LTC_SHA3
    #define LTC_SHA512
@@ -108,11 +108,11 @@
    #define LTC_RNG_GET_BYTES
    #define LTC_RNG_MAKE_PRNG
 
-   #define LTC_NO_PK
+   //#define LTC_NO_PK
    #define LTC_MRSA
    #define LTC_MECC
 
-   #define LTC_NO_MISC
+   //#define LTC_NO_MISC
    #define LTC_BASE64
 #endif
 

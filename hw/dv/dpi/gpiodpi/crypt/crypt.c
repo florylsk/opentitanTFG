@@ -6,7 +6,7 @@
   @file crypt.c
   Build strings, Tom St Denis
 */
-#define NAME_VALUE(s) #s"="NAME(s)
+#define NAME_VALUE(s) #s"=" NAME(s)
 #define NAME(s) #s
 
 const char *crypt_build_settings =
@@ -301,7 +301,7 @@ const char *crypt_build_settings =
 
     "\nPRNG:\n"
 #if defined(LTC_YARROW)
-    "   Yarrow ("NAME_VALUE(LTC_YARROW_AES)")\n"
+    "   Yarrow (" NAME_VALUE(LTC_YARROW_AES)")\n"
 #endif
 #if defined(LTC_SPRNG)
     "   SPRNG\n"
@@ -359,7 +359,7 @@ const char *crypt_build_settings =
 #endif
 #endif
 #if defined(LTC_PK_MAX_RETRIES)
-    "   "NAME_VALUE(LTC_PK_MAX_RETRIES)"\n"
+    "   " NAME_VALUE(LTC_PK_MAX_RETRIES)"\n"
 #endif
 
     "\nMPI (Math):\n"
@@ -376,7 +376,7 @@ const char *crypt_build_settings =
     "   GMP_DESC\n"
 #endif
 #if defined(LTC_MILLER_RABIN_REPS)
-    "   "NAME_VALUE(LTC_MILLER_RABIN_REPS)"\n"
+    "   " NAME_VALUE(LTC_MILLER_RABIN_REPS)"\n"
 #endif
 
     "\nCompiler:\n"
