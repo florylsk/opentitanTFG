@@ -60,108 +60,107 @@
       && !defined(LTC_NO_PROTOTYPES)
 #define LTC_NO_PROTOTYPES
 #endif
-#define LTC_EASY //////////////////////////////////////////////////////
+
 /* shortcut to disable automatic inclusion */
 #if defined LTC_NOTHING && !defined LTC_EASY
-  #define LTC_NO_CIPHERS
-  #define LTC_NO_MODES
-  #define LTC_NO_HASHES
-  #define LTC_NO_MACS
-  #define LTC_NO_PRNGS
-  #define LTC_NO_PK
-  #define LTC_NO_PKCS
-  #define LTC_NO_MISC
+#define LTC_NO_CIPHERS
+#define LTC_NO_MODES
+#define LTC_NO_HASHES
+#define LTC_NO_MACS
+#define LTC_NO_PRNGS
+#define LTC_NO_PK
+#define LTC_NO_PKCS
+#define LTC_NO_MISC
 #endif /* LTC_NOTHING */
 
 /* Easy button? */
 #ifdef LTC_EASY
-   //#define LTC_NO_CIPHERS
-   #define LTC_RIJNDAEL
-   #define LTC_BLOWFISH
-   #define LTC_DES
-   #define LTC_CAST5
+#define LTC_NO_CIPHERS
+#define LTC_RIJNDAEL
+#define LTC_BLOWFISH
+#define LTC_DES
+#define LTC_CAST5
 
-   //#define LTC_NO_MODES
-   #define LTC_ECB_MODE
-   #define LTC_CBC_MODE
-   #define LTC_CTR_MODE
+#define LTC_NO_MODES
+#define LTC_ECB_MODE
+#define LTC_CBC_MODE
+#define LTC_CTR_MODE
 
-   //#define LTC_NO_HASHES
-   #define LTC_SHA1
-   #define LTC_SHA3
-   #define LTC_SHA512
-   #define LTC_SHA384
-   #define LTC_SHA256
-   #define LTC_SHA224
-   #define LTC_HASH_HELPERS
+#define LTC_NO_HASHES
+#define LTC_SHA1
+#define LTC_SHA3
+#define LTC_SHA512
+#define LTC_SHA384
+#define LTC_SHA256
+#define LTC_SHA224
+#define LTC_HASH_HELPERS
 
-   #define LTC_NO_MACS
-   #define LTC_HMAC
-   #define LTC_OMAC
-   #define LTC_CCM_MODE
+#define LTC_NO_MACS
+#define LTC_HMAC
+#define LTC_OMAC
+#define LTC_CCM_MODE
 
-   #define LTC_NO_PRNGS
-   #define LTC_SPRNG
-   #define LTC_YARROW
-   #define LTC_DEVRANDOM
-   #define LTC_TRY_URANDOM_FIRST
-   #define LTC_RNG_GET_BYTES
-   #define LTC_RNG_MAKE_PRNG
+#define LTC_NO_PRNGS
+#define LTC_SPRNG
+#define LTC_YARROW
+#define LTC_DEVRANDOM
+#define LTC_TRY_URANDOM_FIRST
+#define LTC_RNG_GET_BYTES
+#define LTC_RNG_MAKE_PRNG
 
-   //#define LTC_NO_PK
-   #define LTC_MRSA
-   #define LTC_MECC
+#define LTC_NO_PK
+#define LTC_MRSA
+#define LTC_MECC
 
-   //#define LTC_NO_MISC
-   #define LTC_BASE64
+#define LTC_NO_MISC
+#define LTC_BASE64
 #endif
 
 /* The minimal set of functionality to run the tests */
 #ifdef LTC_MINIMAL
-   #define LTC_RIJNDAEL
-   #define LTC_SHA256
-   #define LTC_YARROW
-   #define LTC_CTR_MODE
+#define LTC_RIJNDAEL
+#define LTC_SHA256
+#define LTC_YARROW
+#define LTC_CTR_MODE
 
-   #define LTC_RNG_MAKE_PRNG
-   #define LTC_RNG_GET_BYTES
-   #define LTC_DEVRANDOM
-   #define LTC_TRY_URANDOM_FIRST
+#define LTC_RNG_MAKE_PRNG
+#define LTC_RNG_GET_BYTES
+#define LTC_DEVRANDOM
+#define LTC_TRY_URANDOM_FIRST
 
-   #undef LTC_NO_FILE
+#undef LTC_NO_FILE
 #endif
 
 /* Enable self-test test vector checking */
-#define LTC_NO_TEST
 #ifndef LTC_NO_TEST
-   #define LTC_TEST
+#define LTC_TEST
 #endif
 /* Enable extended self-tests */
-/* #define LTC_TEST_EXT */
+//#define LTC_TEST_EXT
 
 /* Use small code where possible */
 /* #define LTC_SMALL_CODE */
 
 /* clean the stack of functions which put private information on stack */
-/* #define LTC_CLEAN_STACK */
+//#define LTC_CLEAN_STACK
 
 /* disable all file related functions */
-//#define LTC_NO_FILE */
+//#define LTC_NO_FILE
 
 /* disable all forms of ASM */
-/* #define LTC_NO_ASM */
+//#define LTC_NO_ASM
 
 /* disable FAST mode */
-/* #define LTC_NO_FAST */
+//#define LTC_NO_FAST
 
 /* disable BSWAP on x86 */
-/* #define LTC_NO_BSWAP */
+//#define LTC_NO_BSWAP
 
 /* ---> math provider? <--- */
-//#ifndef LTC_NO_MATH
+#ifndef LTC_NO_MATH
 
 /* LibTomMath */
-//#define LTM_DESC
+/* #define LTM_DESC */
 
 /* TomsFastMath */
 #define TFM_DESC
@@ -169,7 +168,7 @@
 /* GNU Multiple Precision Arithmetic Library */
 /* #define GMP_DESC */
 
-//#endif /* LTC_NO_MATH */
+#endif /* LTC_NO_MATH */
 
 /* ---> Symmetric Block Ciphers <--- */
 #ifndef LTC_NO_CIPHERS
@@ -185,10 +184,10 @@
  * (saves 4KB of ram), _ALL_TABLES enables all tables during setup */
 #define LTC_TWOFISH
 #ifndef LTC_NO_TABLES
-   #define LTC_TWOFISH_TABLES
-   /* #define LTC_TWOFISH_ALL_TABLES */
+#define LTC_TWOFISH_TABLES
+/* #define LTC_TWOFISH_ALL_TABLES */
 #else
-   #define LTC_TWOFISH_SMALL
+#define LTC_TWOFISH_SMALL
 #endif
 /* #define LTC_TWOFISH_SMALL */
 /* LTC_DES includes EDE triple-DES */
@@ -235,10 +234,10 @@
 /* LRW mode */
 #define LTC_LRW_MODE
 #ifndef LTC_NO_TABLES
-   /* like GCM mode this will enable 16 8x128 tables [64KB] that make
+/* like GCM mode this will enable 16 8x128 tables [64KB] that make
     * seeking very fast.
-    */
-   #define LTC_LRW_TABLES
+ */
+#define LTC_LRW_TABLES
 #endif
 
 /* XTS mode */
@@ -301,7 +300,7 @@
 
 /* Use 64KiB tables */
 #ifndef LTC_NO_TABLES
-   #define LTC_GCM_TABLES
+#define LTC_GCM_TABLES
 #endif
 
 /* USE SSE2? requires GCC works on x86_32 and x86_64*/
@@ -353,9 +352,9 @@
 /* which descriptor of AES to use?  */
 /* 0 = rijndael_enc 1 = aes_enc, 2 = rijndael [full], 3 = aes [full] */
 #ifdef ENCRYPT_ONLY
-  #define LTC_YARROW_AES 0
+#define LTC_YARROW_AES 0
 #else
-  #define LTC_YARROW_AES 2
+#define LTC_YARROW_AES 2
 #endif
 
 #endif
@@ -371,10 +370,10 @@
 /* with non-glibc or glibc 2.17+ prefer clock_gettime over gettimeofday */
 #if defined(__GLIBC__) && defined(__GLIBC_PREREQ)
 #if __GLIBC_PREREQ(2, 17)
-  #define LTC_CLOCK_GETTIME
+#define LTC_CLOCK_GETTIME
 #endif
 #elif defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE >= 200112L
-  #define LTC_CLOCK_GETTIME
+#define LTC_CLOCK_GETTIME
 #endif
 
 #else
@@ -441,7 +440,7 @@
 #define LTC_ECC_SHAMIR
 
 #if defined(TFM_DESC) && defined(LTC_MECC)
-   #define LTC_MECC_ACCEL
+#define LTC_MECC_ACCEL
 #endif
 
 /* do we want fixed point ECC */
@@ -519,152 +518,152 @@
 #ifdef LTC_MECC
 /* Supported ECC Key Sizes */
 #ifndef LTC_NO_CURVES
-   #define LTC_ECC_BRAINPOOLP160R1
-   #define LTC_ECC_BRAINPOOLP160T1
-   #define LTC_ECC_BRAINPOOLP192R1
-   #define LTC_ECC_BRAINPOOLP192T1
-   #define LTC_ECC_BRAINPOOLP224R1
-   #define LTC_ECC_BRAINPOOLP224T1
-   #define LTC_ECC_BRAINPOOLP256R1
-   #define LTC_ECC_BRAINPOOLP256T1
-   #define LTC_ECC_BRAINPOOLP320R1
-   #define LTC_ECC_BRAINPOOLP320T1
-   #define LTC_ECC_BRAINPOOLP384R1
-   #define LTC_ECC_BRAINPOOLP384T1
-   #define LTC_ECC_BRAINPOOLP512R1
-   #define LTC_ECC_BRAINPOOLP512T1
-   #define LTC_ECC_PRIME192V2
-   #define LTC_ECC_PRIME192V3
-   #define LTC_ECC_PRIME239V1
-   #define LTC_ECC_PRIME239V2
-   #define LTC_ECC_PRIME239V3
-   #define LTC_ECC_SECP112R1
-   #define LTC_ECC_SECP112R2
-   #define LTC_ECC_SECP128R1
-   #define LTC_ECC_SECP128R2
-   #define LTC_ECC_SECP160K1
-   #define LTC_ECC_SECP160R1
-   #define LTC_ECC_SECP160R2
-   #define LTC_ECC_SECP192K1
-   #define LTC_ECC_SECP192R1
-   #define LTC_ECC_SECP224K1
-   #define LTC_ECC_SECP224R1
-   #define LTC_ECC_SECP256K1
-   #define LTC_ECC_SECP256R1
-   #define LTC_ECC_SECP384R1
-   #define LTC_ECC_SECP521R1
+#define LTC_ECC_BRAINPOOLP160R1
+#define LTC_ECC_BRAINPOOLP160T1
+#define LTC_ECC_BRAINPOOLP192R1
+#define LTC_ECC_BRAINPOOLP192T1
+#define LTC_ECC_BRAINPOOLP224R1
+#define LTC_ECC_BRAINPOOLP224T1
+#define LTC_ECC_BRAINPOOLP256R1
+#define LTC_ECC_BRAINPOOLP256T1
+#define LTC_ECC_BRAINPOOLP320R1
+#define LTC_ECC_BRAINPOOLP320T1
+#define LTC_ECC_BRAINPOOLP384R1
+#define LTC_ECC_BRAINPOOLP384T1
+#define LTC_ECC_BRAINPOOLP512R1
+#define LTC_ECC_BRAINPOOLP512T1
+#define LTC_ECC_PRIME192V2
+#define LTC_ECC_PRIME192V3
+#define LTC_ECC_PRIME239V1
+#define LTC_ECC_PRIME239V2
+#define LTC_ECC_PRIME239V3
+#define LTC_ECC_SECP112R1
+#define LTC_ECC_SECP112R2
+#define LTC_ECC_SECP128R1
+#define LTC_ECC_SECP128R2
+#define LTC_ECC_SECP160K1
+#define LTC_ECC_SECP160R1
+#define LTC_ECC_SECP160R2
+#define LTC_ECC_SECP192K1
+#define LTC_ECC_SECP192R1
+#define LTC_ECC_SECP224K1
+#define LTC_ECC_SECP224R1
+#define LTC_ECC_SECP256K1
+#define LTC_ECC_SECP256R1
+#define LTC_ECC_SECP384R1
+#define LTC_ECC_SECP521R1
 #endif
 #endif
 
 #if defined(LTC_DER)
-   #ifndef LTC_DER_MAX_RECURSION
-      /* Maximum recursion limit when processing nested ASN.1 types. */
-      #define LTC_DER_MAX_RECURSION 30
-   #endif
+#ifndef LTC_DER_MAX_RECURSION
+/* Maximum recursion limit when processing nested ASN.1 types. */
+#define LTC_DER_MAX_RECURSION 30
+#endif
 #endif
 
 #if defined(LTC_MECC) || defined(LTC_MRSA) || defined(LTC_MDSA) || defined(LTC_SSH)
-   /* Include the MPI functionality?  (required by the PK algorithms) */
-   #define LTC_MPI
+/* Include the MPI functionality?  (required by the PK algorithms) */
+#define LTC_MPI
 
-   #ifndef LTC_PK_MAX_RETRIES
-      /* iterations limit for retry-loops */
-      #define LTC_PK_MAX_RETRIES  20
-   #endif
+#ifndef LTC_PK_MAX_RETRIES
+/* iterations limit for retry-loops */
+#define LTC_PK_MAX_RETRIES  20
+#endif
 #endif
 
 #ifdef LTC_MRSA
-   #define LTC_PKCS_1
+#define LTC_PKCS_1
 #endif
 
 #if defined(LTC_MRSA) || defined(LTC_MECC)
-   #define LTC_PKCS_8
+#define LTC_PKCS_8
 #endif
 
 #ifdef LTC_PKCS_8
-   #define LTC_PADDING
-   #define LTC_PBES
+#define LTC_PADDING
+#define LTC_PBES
 #endif
 
 #if defined(LTC_CLEAN_STACK)
 /* if you're sure that you want to use it, remove the line below */
-   #error LTC_CLEAN_STACK is considered as broken
+#error LTC_CLEAN_STACK is considered as broken
 #endif
 
 #if defined(LTC_PBES) && !defined(LTC_PKCS_5)
-   #error LTC_PBES requires LTC_PKCS_5
+#error LTC_PBES requires LTC_PKCS_5
 #endif
 
 #if defined(LTC_PBES) && !defined(LTC_PKCS_12)
-   #error LTC_PBES requires LTC_PKCS_12
+#error LTC_PBES requires LTC_PKCS_12
 #endif
 
 #if defined(LTC_PKCS_5) && !defined(LTC_HMAC)
-   #error LTC_PKCS_5 requires LTC_HMAC
+#error LTC_PKCS_5 requires LTC_HMAC
 #endif
 
 #if defined(LTC_PKCS_5) && !defined(LTC_HASH_HELPERS)
-   #error LTC_PKCS_5 requires LTC_HASH_HELPERS
+#error LTC_PKCS_5 requires LTC_HASH_HELPERS
 #endif
 
 #if defined(LTC_PELICAN) && !defined(LTC_RIJNDAEL)
-   #error Pelican-MAC requires LTC_RIJNDAEL
+#error Pelican-MAC requires LTC_RIJNDAEL
 #endif
 
 #if defined(LTC_EAX_MODE) && !(defined(LTC_CTR_MODE) && defined(LTC_OMAC))
-   #error LTC_EAX_MODE requires CTR and LTC_OMAC mode
+#error LTC_EAX_MODE requires CTR and LTC_OMAC mode
 #endif
 
 #if defined(LTC_YARROW) && !defined(LTC_CTR_MODE)
-   #error LTC_YARROW requires LTC_CTR_MODE chaining mode to be defined!
+#error LTC_YARROW requires LTC_CTR_MODE chaining mode to be defined!
 #endif
 
 #if defined(LTC_DER) && !defined(LTC_MPI)
-   #error ASN.1 DER requires MPI functionality
+#error ASN.1 DER requires MPI functionality
 #endif
 
 #if (defined(LTC_MDSA) || defined(LTC_MRSA) || defined(LTC_MECC)) && !defined(LTC_DER)
-   #error PK requires ASN.1 DER functionality, make sure LTC_DER is enabled
+#error PK requires ASN.1 DER functionality, make sure LTC_DER is enabled
 #endif
 
 #if defined(LTC_BCRYPT) && !defined(LTC_BLOWFISH)
-   #error LTC_BCRYPT requires LTC_BLOWFISH
+#error LTC_BCRYPT requires LTC_BLOWFISH
 #endif
 
 #if defined(LTC_CHACHA20POLY1305_MODE) && (!defined(LTC_CHACHA) || !defined(LTC_POLY1305))
-   #error LTC_CHACHA20POLY1305_MODE requires LTC_CHACHA + LTC_POLY1305
+#error LTC_CHACHA20POLY1305_MODE requires LTC_CHACHA + LTC_POLY1305
 #endif
 
 #if defined(LTC_CHACHA20_PRNG) && !defined(LTC_CHACHA)
-   #error LTC_CHACHA20_PRNG requires LTC_CHACHA
+#error LTC_CHACHA20_PRNG requires LTC_CHACHA
 #endif
 
 #if defined(LTC_XSALSA20) && !defined(LTC_SALSA20)
-   #error LTC_XSALSA20 requires LTC_SALSA20
+#error LTC_XSALSA20 requires LTC_SALSA20
 #endif
 
 #if defined(LTC_RC4) && !defined(LTC_RC4_STREAM)
-   #error LTC_RC4 requires LTC_RC4_STREAM
+#error LTC_RC4 requires LTC_RC4_STREAM
 #endif
 
 #if defined(LTC_SOBER128) && !defined(LTC_SOBER128_STREAM)
-   #error LTC_SOBER128 requires LTC_SOBER128_STREAM
+#error LTC_SOBER128 requires LTC_SOBER128_STREAM
 #endif
 
 #if defined(LTC_BLAKE2SMAC) && !defined(LTC_BLAKE2S)
-   #error LTC_BLAKE2SMAC requires LTC_BLAKE2S
+#error LTC_BLAKE2SMAC requires LTC_BLAKE2S
 #endif
 
 #if defined(LTC_BLAKE2BMAC) && !defined(LTC_BLAKE2B)
-   #error LTC_BLAKE2BMAC requires LTC_BLAKE2B
+#error LTC_BLAKE2BMAC requires LTC_BLAKE2B
 #endif
 
 #if defined(LTC_SPRNG) && !defined(LTC_RNG_GET_BYTES)
-   #error LTC_SPRNG requires LTC_RNG_GET_BYTES
+#error LTC_SPRNG requires LTC_RNG_GET_BYTES
 #endif
 
 #if defined(LTC_NO_MATH) && (defined(LTM_DESC) || defined(TFM_DESC) || defined(GMP_DESC))
-   #error LTC_NO_MATH defined, but also a math descriptor
+#error LTC_NO_MATH defined, but also a math descriptor
 #endif
 
 /* THREAD management */
@@ -701,10 +700,10 @@
 #endif
 
 #ifndef LTC_NO_FILE
-   /* buffer size for reading from a file via fread(..) */
-   #ifndef LTC_FILE_READ_BUFSIZE
-   #define LTC_FILE_READ_BUFSIZE 8192
-   #endif
+/* buffer size for reading from a file via fread(..) */
+#ifndef LTC_FILE_READ_BUFSIZE
+#define LTC_FILE_READ_BUFSIZE 8192
+#endif
 #endif
 
 /* ECC backwards compatibility */

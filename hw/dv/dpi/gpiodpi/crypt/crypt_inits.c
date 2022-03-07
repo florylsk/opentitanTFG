@@ -1,6 +1,6 @@
 /* LibTomCrypt, modular cryptographic library -- Tom St Denis */
 /* SPDX-License-Identifier: Unlicense */
-#include "../headers/tomcrypt_private.h"
+#include "tomcrypt_private.h"
 
 /**
   @file crypt_inits.c

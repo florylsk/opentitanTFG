@@ -1,6 +1,6 @@
 /* LibTomCrypt, modular cryptographic library -- Tom St Denis */
 /* SPDX-License-Identifier: Unlicense */
-#include "../headers/tomcrypt_private.h"
+#include "tomcrypt_private.h"
 
 /**
   @file crypt_find_hash.c
@@ -15,6 +15,7 @@
 int find_hash(const char *name)
 {
    int x;
+   LTC_ARGCHK(name != NULL);
    LTC_MUTEX_LOCK(&ltc_hash_mutex);
    for (x = 0; x < TAB_SIZE; x++) {
        if (hash_descriptor[x].name != NULL && XSTRCMP(hash_descriptor[x].name, name) == 0) {

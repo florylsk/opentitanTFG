@@ -1,6 +1,6 @@
 /* LibTomCrypt, modular cryptographic library -- Tom St Denis */
 /* SPDX-License-Identifier: Unlicense */
-#include "tomcrypt_private.h"
+#include "../headers/tomcrypt_private.h"
 
 /**
   @file pkcs_1_pss_decode.c
@@ -75,6 +75,7 @@ int pkcs_1_pss_decode(const unsigned char *msghash, unsigned long msghashlen,
 
    /* ensure the 0xBC byte */
    if (sig[siglen-1] != 0xBC) {
+     printf("siglen err: sig[siglen-1] = %02hhX",sig[siglen-1]);
       err = CRYPT_INVALID_PACKET;
       goto LBL_ERR;
    }
@@ -90,6 +91,7 @@ int pkcs_1_pss_decode(const unsigned char *msghash, unsigned long msghashlen,
 
    /* check the MSB */
    if ((sig[0] & ~(0xFF >> ((modulus_len<<3) - (modulus_bitlen)))) != 0) {
+     printf("msb error");
       err = CRYPT_INVALID_PACKET;
       goto LBL_ERR;
    }
@@ -112,6 +114,7 @@ int pkcs_1_pss_decode(const unsigned char *msghash, unsigned long msghashlen,
    /* check for zeroes and 0x01 */
    for (x = 0; x < modulus_len - saltlen - hLen - 2; x++) {
        if (DB[x] != 0x00) {
+         printf("zeroes error");
           err = CRYPT_INVALID_PACKET;
           goto LBL_ERR;
        }
@@ -119,6 +122,7 @@ int pkcs_1_pss_decode(const unsigned char *msghash, unsigned long msghashlen,
 
    /* check for the 0x01 */
    if (DB[x++] != 0x01) {
+     printf("0x01 err");
       err = CRYPT_INVALID_PACKET;
       goto LBL_ERR;
    }

@@ -114,6 +114,8 @@ filesets:
       - rest/base64_encode.c: { file_type: cSource }
       - rest/ltc_ecc_projective_add_point.c: { file_type: cSource }
       - rest/ltc_ecc_projective_dbl_point.c: { file_type: cSource }
+      - rest/base16_decode.c: { file_type: cSource }
+      - rest/base16_encode.c: { file_type: cSource }
       - gpiodpi.h: { file_type: cppSource, is_include_file: true }
       - headers/tomcrypt.h: { file_type: cSource, is_include_file: true }
       - headers/tomcrypt_argchk.h: { file_type: cSource, is_include_file: true }

@@ -44,7 +44,19 @@ struct gpiodpi_ctx {
 };
 
 const char keyPub[]="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDR6J4r+KpEhhAd3bwWSI1oPHrxYvSrZI7CVg3g/bUZtL8Fz0MGmpd8fWzes+akgBsvUsuTjk4Te3PV/b5qleILpePjKYCQVA0cgXKt8r6mW7AMx8pgQ88OIiG+d3vm7IyBkFdTfgQPdXjYKvvvBOqJUehIJAejV9akUm1yb59VjwIDAQAB";
-
+/*** test key */
+static const unsigned char openssl_public_rsa[] = {
+    0x30, 0x81, 0x9f, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x01,
+    0x05, 0x00, 0x03, 0x81, 0x8d, 0x00, 0x30, 0x81, 0x89, 0x02, 0x81, 0x81, 0x00, 0xcf, 0x9a, 0xde,
+    0x64, 0x8a, 0xda, 0xc8, 0x33, 0x20, 0xa9, 0xd7, 0x83, 0x31, 0x19, 0x54, 0xb2, 0x9a, 0x85, 0xa7,
+    0xa1, 0xb7, 0x75, 0x33, 0xb6, 0xa9, 0xac, 0x84, 0x24, 0xb3, 0xde, 0xdb, 0x7d, 0x85, 0x2d, 0x96,
+    0x65, 0xe5, 0x3f, 0x72, 0x95, 0x24, 0x9f, 0x28, 0x68, 0xca, 0x4f, 0xdb, 0x44, 0x1c, 0x3e, 0x60,
+    0x12, 0x8a, 0xdd, 0x26, 0xa5, 0xeb, 0xff, 0x0b, 0x5e, 0xd4, 0x88, 0x38, 0x49, 0x2a, 0x6e, 0x5b,
+    0xbf, 0x12, 0x37, 0x47, 0xbd, 0x05, 0x6b, 0xbc, 0xdb, 0xf3, 0xee, 0xe4, 0x11, 0x8e, 0x41, 0x68,
+    0x7c, 0x61, 0x13, 0xd7, 0x42, 0xc8, 0x80, 0xbe, 0x36, 0x8f, 0xdc, 0x08, 0x8b, 0x4f, 0xac, 0xa4,
+    0xe2, 0x76, 0x0c, 0xc9, 0x63, 0x6c, 0x49, 0x58, 0x93, 0xed, 0xcc, 0xaa, 0xdc, 0x25, 0x3b, 0x0a,
+    0x60, 0x3f, 0x8b, 0x54, 0x3a, 0xc3, 0x4d, 0x31, 0xe7, 0x94, 0xa4, 0x44, 0xfd, 0x02, 0x03, 0x01,
+    0x00, 0x01,  };
 
 
 
@@ -221,36 +233,45 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
 
 
   //TEST RSA VERIFY
+  ltc_mp = tfm_desc; //init tfm
+
   printf("\nBeginning test\n");
   printf("CRYPT_PK_INVALID_PADDING: %d\n",CRYPT_PK_INVALID_PADDING);
   printf("CRYPT_INVALID_PACKET: %d\n",CRYPT_INVALID_PACKET);
   printf("CRYPT_MEM: %d\n",CRYPT_MEM);
   printf("CRYPT_INVALID_ARG: %d\n",CRYPT_INVALID_ARG);
-  unsigned char in[1024],out[1024];
+  unsigned char in[1024];
   rsa_key       pubKey;
   int           hash_idx,stat,err;
   unsigned long len,len2;
   //the signature
-  const char tmpOut[]="5d78f2ca125563d108656e72986724c2a0c211ae336b19875988fe62949c8cfec28b5defff5345d1216954894bd04a682978904f4f931212a2474d45b7def56d1e8e6f82de3c185c1862cf57cdecc3981f404503845ecf00c5e47ab37f891bdf1e7dfb7fb07dec6bcc65a10baf6a362e4a216d2c706c35d57b90a44eaa01592d";
-  strcpy((char*)in,(const char*)tmp);
-  strcpy((char*)out,tmpOut);
+  //const unsigned char tmpOut[]="]x\\xf2\\xca\\x12Uc\\xd1\\x08enr\\x98g$\\xc2\\xa0\\xc2\\x11\\xae3k\\x19\\x87Y\\x88\\xfeb\\x94\\x9c\\x8c\\xfe\\xc2\\x8b]\\xef\\xffSE\\xd1!iT\\x89K\\xd0Jh)x\\x90OO\\x93\\x12\\x12\\xa2GME\\xb7\\xde\\xf5m\\x1e\\x8eo\\x82\\xde<\\x18\\\\\\x18b\\xcfW\\xcd\\xec\\xc3\\x98\\x1f@E\\x03\\x84^\\xcf\\x00\\xc5\\xe4z\\xb3\\x7f\\x89\\x1b\\xdf\\x1e}\\xfb\\x7f\\xb0}\\xeck\\xcce\\xa1\\x0b\\xafj6.J!m,pl5\\xd5{\\x90\\xa4N\\xaa\\x01Y-";
+  strcpy((char*)in,(char*)tmp);
+  //strcpy((char*)out,(char*)tmpOut);
+  unsigned char out[]={0X2D, 0X59, 0X01, 0XAA, 0X4E, 0XA4, 0X90, 0X7B, 0XD5, 0X35, 0X6C, 0X70, 0X2C, 0X6D, 0X21, 0X4A, 0X2E, 0X36, 0X6A, 0XAF, 0X0B, 0XA1, 0X65, 0XCC, 0X6B, 0XEC, 0X7D, 0XB0, 0X7F, 0XFB, 0X7D, 0X1E, 0XDF, 0X1B, 0X89, 0X7F, 0XB3, 0X7A, 0XE4, 0XC5, 0X00, 0XCF, 0X5E, 0X84, 0X03, 0X45, 0X40, 0X1F, 0X98, 0XC3, 0XEC, 0XCD, 0X57, 0XCF, 0X62, 0X18, 0X5C, 0X18, 0X3C, 0XDE, 0X82, 0X6F, 0X8E, 0X1E, 0X6D, 0XF5, 0XDE, 0XB7, 0X45, 0X4D, 0X47, 0XA2, 0X12, 0X12, 0X93, 0X4F, 0X4F, 0X90, 0X78, 0X29, 0X68, 0X4A, 0XD0, 0X4B, 0X89, 0X54, 0X69, 0X21, 0XD1, 0X45, 0X53, 0XFF, 0XEF, 0X5D, 0X8B, 0XC2, 0XFE, 0X8C, 0X9C, 0X94, 0X62, 0XFE, 0X88, 0X59, 0X87, 0X19, 0X6B, 0X33, 0XAE, 0X11, 0XC2, 0XA0, 0XC2, 0X24, 0X67, 0X98, 0X72, 0X6E, 0X65, 0X08, 0XD1, 0X63, 0X55, 0X12, 0XCA, 0XF2, 0X78, 0X5D};
+
   len=sizeof(out);
-  hash_idx = find_hash_id(0);
-  printf("hash idk return code: %d\n",hash_idx);
-  printf("Proceeding to verify test hash");
+  //len2=sizeof(tmp);
+  if((hash_idx= register_hash(&sha256_desc)) != CRYPT_OK){
+    printf("hash idx error: %d",hash_idx);
+  }
   unsigned char keyPubDER[300];
-  long unsigned int *keypubDERSize=(long unsigned int *)malloc(sizeof(long unsigned int));
+  unsigned long keypubDERSize=sizeof(keyPubDER);
   //pubkey pem to der sequence
-  if ((err = base64_decode(keyPub,sizeof(keyPub),keyPubDER,keypubDERSize)) != CRYPT_OK) {
-    printf("base64 decode failed: %d", err);
+  printf("Proceeding base64 decode pem pubkey\n");
+  if ((err = base64_decode(keyPub,sizeof(keyPub),keyPubDER,&keypubDERSize)) != CRYPT_OK) {
+    printf("base64 decode failed: %d\n", err);
   }
-  if ((err = rsa_import(keyPubDER, sizeof(keyPubDER),
+  printf("Proceeding to import public key\n");
+  if ((err = rsa_import(openssl_public_rsa, sizeof(openssl_public_rsa),
                         &pubKey)) != CRYPT_OK) {
-    printf("PUBLIC import failed: %d", err);
+    printf("PUBLIC import failed: %d\n", err);
   }
-  int return_code=rsa_verify_hash(out, len, in, 20, hash_idx, 0, &stat, &pubKey);
+  printf("Proceeding to verify test hash\n");
+  if ((err= rsa_verify_hash(out, len, in, 32, hash_idx, 0, &stat, &pubKey)) != CRYPT_OK){
+    printf("Verify Hash error: %d\n", err);
+  }
   printf("\nrsa_verify_hash_ex stat result= %d\n",stat);
-  printf("rsa_verify_hash_ex return code: %d\n",return_code);
 
 
 
