@@ -71,6 +71,7 @@ int rsa_verify_hash_ex(const unsigned char *sig,            unsigned long  sigle
   x = siglen;
   if ((err = ltc_mp.rsa_me(sig, siglen, tmpbuf, &x, PK_PUBLIC, key)) != CRYPT_OK) {
      XFREE(tmpbuf);
+     printf("rsa_me error with code: %d",err);
      return err;
   }
   printf("\nc\n");

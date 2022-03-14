@@ -75,7 +75,7 @@ int pkcs_1_pss_decode(const unsigned char *msghash, unsigned long msghashlen,
 
    /* ensure the 0xBC byte */
    if (sig[siglen-1] != 0xBC) {
-     printf("siglen err: sig[siglen-1] = %02hhX",sig[siglen-1]);
+     printf("0xbc err: sig[siglen-1] = 0x%02X",sig[siglen-1]);
       err = CRYPT_INVALID_PACKET;
       goto LBL_ERR;
    }
