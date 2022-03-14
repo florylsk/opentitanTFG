@@ -248,13 +248,13 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   const char hexE[]="10001";
   const char hexN[]="d1e89e2bf8aa4486101dddbc16488d683c7af162f4ab648ec2560de0fdb519b4bf05cf43069a977c7d6cdeb3e6a4801b2f52cb938e4e137b73d5fdbe6a95e20ba5e3e3298090540d1c8172adf2bea65bb00cc7ca6043cf0e2221be777be6ec8c819057537e040f7578d82afbef04ea8951e8482407a357d6a4526d726f9f558f";
   const char hexD[]="bd68fb3950544c2af0e6124c838b0a5691a49aa6a182fae53b052dd6e4f882eeaf244de6fc5188fa63af56b1dd20791c8eb256529aa9673911c87a0455e753a56d088595d4bd8a02f08cddf0d55bcc42c27f2719b7db511d6147e72b832e78c734efa7acf0277a37cc40831a0c73a9ae29a04069b18a2f390c58a38134a64939";
-  const char hexSignature[]="5d78f2ca125563d108656e72986724c2a0c211ae336b19875988fe62949c8cfec28b5defff5345d1216954894bd04a682978904f4f931212a2474d45b7def56d1e8e6f82de3c185c1862cf57cdecc3981f404503845ecf00c5e47ab37f891bdf1e7dfb7fb07dec6bcc65a10baf6a362e4a216d2c706c35d57b90a44eaa01592d";
+  const char hexSignature[]="41b2c1c386f4fdb70a76e066c728c71d161b4d0b48b8529d79bebcdb22445d480443561633c7b75c7b6990194f325e22bbffd871d64dfe82bc5dcdc6798f7e6527663b436a35b90d6f49d639f34e56127dcb5f2e78a526493bbafd43201a59308879bd70584317275c45162eaaabffed9ff415db3a20319b024c7d15813610e1";
   const char hexHash[]="47f53245cd05a2b3e811ad6515000b44604b947a57d441b02125b04f4a16bb74";
 
   unsigned char binE[128];
   unsigned char binN[257];
   unsigned char binD[257];
-  unsigned char binSignature[300];
+  unsigned char binSignature[1024];
   unsigned char binHash[1024];
 
   unsigned long lenSignature;
@@ -298,6 +298,13 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   int verify_hash= rsa_verify_hash_ex(signatureTest,lenSignatureTest,binHash,lenHash,LTC_PKCS_1_PSS,hash_idx,0,&stat,&pubTest);
   printf("Verify hash return: %d\n",verify_hash);
   printf("stat value: %d\n",stat);
+  //works
+
+  //verify hash real
+  printf("proceeding with real signature\n");
+  int verify_hash_real= rsa_verify_hash_ex(binSignature,lenSignature,binHash,lenHash,LTC_PKCS_1_PSS,hash_idx,0,&stat,&pubTest);
+  printf("Verify hash real return: %d\n",verify_hash_real);
+  printf("stat real value: %d\n",stat);
 
 
   gpio_str[read_len] = '\0';

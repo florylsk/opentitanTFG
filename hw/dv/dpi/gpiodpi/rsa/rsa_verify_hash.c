@@ -60,13 +60,11 @@ int rsa_verify_hash_ex(const unsigned char *sig,            unsigned long  sigle
      printf("\nFAIL: Modulus bytelen = %lu, siglen = %lu \n",modulus_bytelen,siglen);
      return CRYPT_INVALID_PACKET;
   }
-  printf("\na\n");
   /* allocate temp buffer for decoded sig */
   tmpbuf =(unsigned char*) XMALLOC(siglen);
   if (tmpbuf == NULL) {
      return CRYPT_MEM;
   }
-  printf("\nb\n");
   /* RSA decode it  */
   x = siglen;
   if ((err = ltc_mp.rsa_me(sig, siglen, tmpbuf, &x, PK_PUBLIC, key)) != CRYPT_OK) {
@@ -74,28 +72,23 @@ int rsa_verify_hash_ex(const unsigned char *sig,            unsigned long  sigle
      printf("rsa_me error with code: %d",err);
      return err;
   }
-  printf("\nc\n");
   /* make sure the output is the right size */
   if (x != siglen) {
      XFREE(tmpbuf);
      printf("fail2");
      return CRYPT_INVALID_PACKET;
   }
-  printf("\nd\n");
   if (padding == LTC_PKCS_1_PSS) {
     /* PSS decode and verify it */
 
     if(modulus_bitlen%8 == 1){
       err = pkcs_1_pss_decode(hash, hashlen, tmpbuf+1, x-1, saltlen, hash_idx, modulus_bitlen, stat);
-      printf("\ne\n");
     }
     else{
       err = pkcs_1_pss_decode(hash, hashlen, tmpbuf, x, saltlen, hash_idx, modulus_bitlen, stat);
-      printf("\nf\n");
     }
 
   } else {
-    printf("\ng\n");
     /* PKCS #1 v1.5 decode it */
     unsigned char *out;
     unsigned long outlen;
@@ -108,22 +101,18 @@ int rsa_verify_hash_ex(const unsigned char *sig,            unsigned long  sigle
       err = CRYPT_MEM;
       goto bail_2;
     }
-    printf("\nh\n");
     if ((err = pkcs_1_v1_5_decode(tmpbuf, x, LTC_PKCS_1_EMSA, modulus_bitlen, out, &outlen, &decoded)) != CRYPT_OK) {
       XFREE(out);
       goto bail_2;
     }
-    printf("\ni\n");
     if (padding == LTC_PKCS_1_V1_5) {
       unsigned long loid[16], reallen;
       ltc_asn1_list digestinfo[2], siginfo[2];
-      printf("\nj\n");
       /* not all hashes have OIDs... so sad */
       if (hash_descriptor[hash_idx].OIDlen == 0) {
          err = CRYPT_INVALID_ARG;
          goto bail_2;
       }
-      printf("\nk\n");
       /* now we must decode out[0...outlen-1] using ASN.1, test the OID and then test the hash */
       /* construct the SEQUENCE
         SEQUENCE {
@@ -137,7 +126,6 @@ int rsa_verify_hash_ex(const unsigned char *sig,            unsigned long  sigle
       LTC_SET_ASN1(digestinfo, 1, LTC_ASN1_NULL,              NULL,                          0);
       LTC_SET_ASN1(siginfo,    0, LTC_ASN1_SEQUENCE,          digestinfo,                    2);
       LTC_SET_ASN1(siginfo,    1, LTC_ASN1_OCTET_STRING,      tmpbuf,                        siglen);
-      printf("\nl\n");
       if ((err = der_decode_sequence_strict(out, outlen, siginfo, 2)) != CRYPT_OK) {
          /* fallback to Legacy:missing NULL */
          LTC_SET_ASN1(siginfo, 0, LTC_ASN1_SEQUENCE,          digestinfo,                    1);
@@ -146,12 +134,10 @@ int rsa_verify_hash_ex(const unsigned char *sig,            unsigned long  sigle
            goto bail_2;
          }
       }
-      printf("\nm\n");
       if ((err = der_length_sequence(siginfo, 2, &reallen)) != CRYPT_OK) {
          XFREE(out);
          goto bail_2;
       }
-      printf("\nn\n");
       /* test OID */
       if ((reallen == outlen) &&
           (digestinfo[0].size == hash_descriptor[hash_idx].OIDlen) &&
@@ -159,7 +145,6 @@ int rsa_verify_hash_ex(const unsigned char *sig,            unsigned long  sigle
           (siginfo[1].size == hashlen) &&
         (XMEMCMP(siginfo[1].data, hash, hashlen) == 0)) {
          *stat = 1;
-         printf("\no\n");
       }
     } else {
       /* only check if the hash is equal */
@@ -167,7 +152,6 @@ int rsa_verify_hash_ex(const unsigned char *sig,            unsigned long  sigle
           (XMEMCMP(out, hash, hashlen) == 0)) {
         *stat = 1;
       }
-      printf("\np\n");
     }
 
 #ifdef LTC_CLEAN_STACK
