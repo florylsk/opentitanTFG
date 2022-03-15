@@ -199,17 +199,20 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   if (read_len < 0) {
     return ctx->driven_pin_values;
   }
-  //TEST SHA 256
-  int i;
+
+  /*
+   * Split input into 3 tokens: public key, signature and operations
+   */
+  //variables for input tokenization and sha256
+  int i,tokenCounter=0;
   unsigned char binHash[32];
   hash_state md;
+
   char* message=(char*)gpio_str;
-  //split message into tokens
   char* token=strtok(message,"\t");
   char *inPubPem;
   char *inSigHex;
-  char *inMessage;
-  int tokenCounter=0;
+  char *inOperations;
   while( token != NULL ) {
     if (tokenCounter==0){
       inPubPem=token;
@@ -218,70 +221,72 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
       inSigHex=token;
     }
     else{
-      inMessage=token;
+      inOperations=token;
     }
     token = strtok(NULL, "\t");
     tokenCounter++;
   }
-  printf("\nPubpem:%s:END\n",inPubPem);
-  printf("sigHex:%s:END\n",inSigHex);
-  printf("Message:%s:END\n",inMessage);
-
+  /*
+   * Calculate sha256 hash of operations
+   */
   sha256_init(&md);
-  sha256_process(&md, (unsigned char*)inMessage, (unsigned long)XSTRLEN(inMessage));
+  sha256_process(&md, (unsigned char*)inOperations, (unsigned long)XSTRLEN(inOperations));
   sha256_done(&md, binHash);
-  printf("\nHASH 256:");
-  for(int i=0;i<32;++i){
-    printf("%02x",binHash[i]);
-  }
-  printf(":END\n");
 
 
-  //TEST RSA VERIFY
-  ltc_mp = tfm_desc; //init tfm
+  /*
+   * Verify signature with calculated hash and input signature and public key
+   */
+  ltc_mp = tfm_desc; //init the multiple precision arithmetic library TomsFastMath
 
-  printf("\nBeginning test\n");
+  //variables for RSA
   rsa_key       pubKey;
   int           hash_idx,stat,err;
+  unsigned long lenSignature, lenKeyPubDer;
+  unsigned char binSignature[1024],keyPubDER[1024];
+
+  lenSignature=sizeof(binSignature);
+  lenKeyPubDer=sizeof(keyPubDER);
+
+  //register sha256 hash for usage
   if((hash_idx= register_hash(&sha256_desc)) != CRYPT_OK){
     printf("hash idx error: %d",hash_idx);
   }
-
-  unsigned char binSignature[1024];
-  unsigned long lenSignature;
-  lenSignature=sizeof(binSignature);
-
-
-  //hexadecimal to binary
-  int radix_to_bin_Signature=radix_to_bin(inSigHex,16,binSignature,&lenSignature);
-  printf("Radix to bin operation on signature: %d\n",radix_to_bin_Signature);
-
-
-  //test with PEM now
-  printf("proceeding with PEM certificate now\n");
-  unsigned long lenX509;
-  unsigned char keyPubDER[1024];
-  lenX509=sizeof(keyPubDER);
-
-  printf("Decoding pem base64 to der\n");
-  if ((err= base64_decode(inPubPem,strlen(inPubPem),keyPubDER,&lenX509)) != CRYPT_OK){
+  //signature hexadecimal to binary
+  if ((err=radix_to_bin(inSigHex,16,binSignature,&lenSignature)) != CRYPT_OK){
+    printf("Error radix to bin operation on signature: %d\n",err);
+  }
+  //public key pem to der
+  if ((err= base64_decode(inPubPem,strlen(inPubPem),keyPubDER,&lenKeyPubDer)) != CRYPT_OK){
     printf("\nError decoding PEM: %d\n",err);
   }
-  printf("Proceeding to import public key\n");
-  if ((err = rsa_import(keyPubDER,lenX509,&pubKey)) != CRYPT_OK) {
+  //import public key
+  if ((err = rsa_import(keyPubDER,lenKeyPubDer,&pubKey)) != CRYPT_OK) {
     printf("PUBLIC KEY import failed: %d\n", err);
   }
-  printf("proceeding with real signature\n");
-  int verify_hash_real= rsa_verify_hash_ex(binSignature,lenSignature,binHash,32,LTC_PKCS_1_PSS,hash_idx,0,&stat,&pubKey);
-  printf("Verify hash real return: %d\n",verify_hash_real);
-  printf("stat real value: %d\n",stat);
+  //verify the hash
+  if ((err=rsa_verify_hash_ex(binSignature,lenSignature,binHash,32,LTC_PKCS_1_PSS,hash_idx,0,&stat,&pubKey)) != CRYPT_OK){
+    printf("Error verifying hash: %d\n",err);
+  }
+  //show verifying result
+  if (stat==0){
+    printf("Signature Verification FAILED!\n");
+  }
+  else if (stat==1){
+    printf("Signature Verification SUCCESS!\n");
+  }
+  //free key memory
   rsa_free(&pubKey);
-
 
 
   gpio_str[read_len] = '\0';
 
-  char *gpio_text = gpio_str;
+  //char *gpio_text = gpio_str;
+  char *gpio_text = inOperations;
+  if (stat==0){
+    printf("Discarded unverified data!\n");
+    return ctx->driven_pin_values;
+  }
   for (; *gpio_text != '\0'; ++gpio_text) {
     switch (*gpio_text) {
       case '\n':
