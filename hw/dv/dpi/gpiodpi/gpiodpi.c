@@ -279,10 +279,11 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   rsa_free(&pubKey);
 
 
-  gpio_str[read_len] = '\0';
+  //gpio_str[read_len] = '\0';
 
   //char *gpio_text = gpio_str;
   char *gpio_text = inOperations;
+
   if (stat==0){
     printf("Discarded unverified data!\n");
     return ctx->driven_pin_values;
@@ -301,6 +302,7 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
           fprintf(stderr,
                   "GPIO: Host tried to pull disabled pin low: pin %2d\n", idx);
         }
+        printf("Pin #%d changed to low!\n",idx);
         CLR_BIT(ctx->driven_pin_values, idx);
         break;
       }
@@ -312,6 +314,7 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
           fprintf(stderr,
                   "GPIO: Host tried to pull disabled pin high: pin %2d\n", idx);
         }
+        printf("Pin #%d changed to high!\n",idx);
         SET_BIT(ctx->driven_pin_values, idx);
         break;
       }
