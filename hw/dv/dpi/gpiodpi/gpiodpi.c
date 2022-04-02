@@ -226,6 +226,11 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
     token = strtok(NULL, "\t");
     tokenCounter++;
   }
+
+  if (tokenCounter != 3){
+    printf("\n[-] Invalid input\n");
+    return ctx->driven_pin_values;
+  }
   /*
    * Calculate sha256 hash of operations
    */
@@ -251,43 +256,48 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   //register sha256 hash for usage
   if((hash_idx= register_hash(&sha256_desc)) != CRYPT_OK){
     printf("hash idx error: %d",hash_idx);
+    return ctx->driven_pin_values;
   }
   //signature hexadecimal to binary
   if ((err=radix_to_bin(inSigHex,16,binSignature,&lenSignature)) != CRYPT_OK){
     printf("Error radix to bin operation on signature: %d\n",err);
+    return ctx->driven_pin_values;
   }
   //public key pem to der
   if ((err= base64_decode(inPubPem,strlen(inPubPem),keyPubDER,&lenKeyPubDer)) != CRYPT_OK){
     printf("\nError decoding PEM: %d\n",err);
+    return ctx->driven_pin_values;
   }
   //import public key
   if ((err = rsa_import(keyPubDER,lenKeyPubDer,&pubKey)) != CRYPT_OK) {
     printf("PUBLIC KEY import failed: %d\n", err);
+    return ctx->driven_pin_values;
   }
   //verify the hash
   if ((err=rsa_verify_hash_ex(binSignature,lenSignature,binHash,32,LTC_PKCS_1_PSS,hash_idx,0,&stat,&pubKey)) != CRYPT_OK){
     printf("Error verifying hash: %d\n",err);
+    return ctx->driven_pin_values;
   }
   //show verifying result
   if (stat==0){
-    printf("Signature Verification FAILED!\n");
+    printf("[-] Signature Verification FAILED\n");
   }
   else if (stat==1){
-    printf("Signature Verification SUCCESS!\n");
+    printf("[+] Signature Verification SUCCESS\n");
   }
   //free key memory
   rsa_free(&pubKey);
 
-
-  //gpio_str[read_len] = '\0';
-
-  //char *gpio_text = gpio_str;
-  char *gpio_text = inOperations;
-
+  //discard unverified data
   if (stat==0){
-    printf("Discarded unverified data!\n");
+    printf("[*] Discarded unverified data\n");
     return ctx->driven_pin_values;
   }
+
+  //use verified operations to change pins
+  char *gpio_text = inOperations;
+
+
   for (; *gpio_text != '\0'; ++gpio_text) {
     switch (*gpio_text) {
       case '\n':
@@ -302,7 +312,7 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
           fprintf(stderr,
                   "GPIO: Host tried to pull disabled pin low: pin %2d\n", idx);
         }
-        printf("Pin #%d changed to low!\n",idx);
+        printf("[*] Pin #%d changed to low\n",idx);
         CLR_BIT(ctx->driven_pin_values, idx);
         break;
       }
@@ -314,7 +324,7 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
           fprintf(stderr,
                   "GPIO: Host tried to pull disabled pin high: pin %2d\n", idx);
         }
-        printf("Pin #%d changed to high!\n",idx);
+        printf("[*] Pin #%d changed to high\n",idx);
         SET_BIT(ctx->driven_pin_values, idx);
         break;
       }
