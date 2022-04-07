@@ -20,3 +20,4 @@ while(True):
     echoStr="'"+keyPub+str("\\t")+signature_clean+str("\\t")+input_op+str("\\0")+"'"
     cmd="echo "+echoStr+">/tools/opentitan/gpio0-write"
     os.system(cmd)
+    print("[+] Message sent to device")
