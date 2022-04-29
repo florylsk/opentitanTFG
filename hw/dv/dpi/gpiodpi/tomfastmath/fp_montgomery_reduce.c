@@ -1,6 +1,6 @@
 /* TomsFastMath, a fast ISO C bignum library. -- Tom St Denis */
 /* SPDX-License-Identifier: Unlicense */
-#include <tfm_private.h>
+#include "tfm_private.h"
 
 /******************************************************************/
 #if defined(TFM_X86) && !defined(TFM_SSE2)

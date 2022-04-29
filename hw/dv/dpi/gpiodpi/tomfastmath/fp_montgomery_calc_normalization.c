@@ -1,6 +1,6 @@
 /* TomsFastMath, a fast ISO C bignum library. -- Tom St Denis */
 /* SPDX-License-Identifier: Unlicense */
-#include <tfm_private.h>
+#include "tfm_private.h"
 
 /* computes a = B**n mod b without division or multiplication useful for
  * normalizing numbers in a Montgomery system.

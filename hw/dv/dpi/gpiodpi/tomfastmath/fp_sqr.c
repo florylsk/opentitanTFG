@@ -1,6 +1,6 @@
 /* TomsFastMath, a fast ISO C bignum library. -- Tom St Denis */
 /* SPDX-License-Identifier: Unlicense */
-#include <tfm_private.h>
+#include "tfm_private.h"
 
 /* b = a*a  */
 void fp_sqr(fp_int *A, fp_int *B)

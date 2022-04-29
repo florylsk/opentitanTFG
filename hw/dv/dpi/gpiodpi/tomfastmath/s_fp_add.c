@@ -1,6 +1,6 @@
 /* TomsFastMath, a fast ISO C bignum library. -- Tom St Denis */
 /* SPDX-License-Identifier: Unlicense */
-#include <tfm_private.h>
+#include "tfm_private.h"
 
 /* unsigned addition */
 void s_fp_add(fp_int *a, fp_int *b, fp_int *c)

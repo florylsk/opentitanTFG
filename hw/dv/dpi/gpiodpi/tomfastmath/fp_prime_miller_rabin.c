@@ -1,6 +1,6 @@
 /* TomsFastMath, a fast ISO C bignum library. -- Tom St Denis */
 /* SPDX-License-Identifier: Unlicense */
-#include <tfm_private.h>
+#include "tfm_private.h"
 
 /* Miller-Rabin test of "a" to the base of "b" as described in 
  * HAC pp. 139 Algorithm 4.24

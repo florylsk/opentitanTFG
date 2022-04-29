@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "gpiodpi.h"
-#include "headers/tomcrypt.h"
+#include "libtomcrypt/headers/tomcrypt.h"
 #ifdef __linux__
 #include <pty.h>
 #elif __APPLE__

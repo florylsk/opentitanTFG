@@ -1,6 +1,6 @@
 /* TomsFastMath, a fast ISO C bignum library. -- Tom St Denis */
 /* SPDX-License-Identifier: Unlicense */
-#include <tfm_private.h>
+#include "tfm_private.h"
 
 #if FP_GEN_RANDOM_MAX == 0xffffffff
   #define FP_GEN_RANDOM_SHIFT  32
