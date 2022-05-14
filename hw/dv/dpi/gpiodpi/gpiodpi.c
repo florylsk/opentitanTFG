@@ -334,6 +334,7 @@ uint32_t gpiodpi_host_to_device_tick(void *ctx_void, svBitVecVal *gpio_oe) {
   }
 
 parse_loop_end:
+  gpiodpi_device_to_host(ctx, (svBitVecVal*) &ctx->driven_pin_values, gpio_oe);
   return ctx->driven_pin_values;
 }
 

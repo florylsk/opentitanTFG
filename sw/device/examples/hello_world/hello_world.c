@@ -49,20 +49,19 @@ int main(int argc, char **argv) {
   CHECK_DIF_OK(
       dif_gpio_init(mmio_region_from_addr(TOP_EARLGREY_GPIO_BASE_ADDR), &gpio));
   // Enable GPIO: 0-7 and 16 is input; 8-15 is output.
-  CHECK_DIF_OK(dif_gpio_output_set_enabled_all(&gpio, 0x0ff00));
+  //CHECK_DIF_OK(dif_gpio_output_set_enabled_all(&gpio, 0x0ff00));
+  CHECK_DIF_OK(dif_gpio_output_set_enabled_all(&gpio, 0x0ffff));
 
   // Add DATE and TIME because I keep fooling myself with old versions
   LOG_INFO("Hello World!");
   LOG_INFO("Built at: " __DATE__ ", " __TIME__);
 
-  demo_gpio_startup(&gpio);
+  //demo_gpio_startup(&gpio); No need to wait for this to complete anymore
 
   // Now have UART <-> Buttons/LEDs demo
   // all LEDs off
   CHECK_DIF_OK(dif_gpio_write_all(&gpio, 0x0000));
-  LOG_INFO("Try out the switches on the board");
-  LOG_INFO("or type anything into the console window.");
-  LOG_INFO("The LEDs show the ASCII code of the last character.");
+  LOG_INFO("GPIO module is now functional.");
 
   CHECK_DIF_OK(dif_spi_device_send(&spi, &spi_config, "SPI!", 4,
                                    /*bytes_sent=*/NULL));
