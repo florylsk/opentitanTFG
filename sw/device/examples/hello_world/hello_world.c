@@ -53,7 +53,6 @@ int main(int argc, char **argv) {
   CHECK_DIF_OK(dif_gpio_output_set_enabled_all(&gpio, 0x0ffff));
 
   // Add DATE and TIME because I keep fooling myself with old versions
-  LOG_INFO("Hello World!");
   LOG_INFO("Built at: " __DATE__ ", " __TIME__);
 
   //demo_gpio_startup(&gpio); No need to wait for this to complete anymore
@@ -66,10 +65,10 @@ int main(int argc, char **argv) {
   CHECK_DIF_OK(dif_spi_device_send(&spi, &spi_config, "SPI!", 4,
                                    /*bytes_sent=*/NULL));
 
-  uint32_t gpio_state = 0;
+  //uint32_t gpio_state = 0;
   while (true) {
     busy_spin_micros(10 * 1000);  // 10 ms
-    gpio_state = demo_gpio_to_log_echo(&gpio, gpio_state);
+    //gpio_state = demo_gpio_to_log_echo(&gpio, gpio_state);
     demo_spi_to_log_echo(&spi, &spi_config);
     demo_uart_to_uart_and_gpio_echo(&uart, &gpio);
   }
