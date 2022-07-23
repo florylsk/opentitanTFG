@@ -7,6 +7,13 @@ import csv
 import random
 import os
 from pwn import *
+import signal
+
+def handler(signum, frame):
+    log.info("Exiting...")
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, handler)
 
 def getCoordinates(gh):
     lat=0

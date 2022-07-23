@@ -10,6 +10,13 @@ import pandas as pd
 import numpy as np
 import time
 from pwn import log
+import signal
+
+def handler(signum, frame):
+    log.info("Exiting...")
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, handler)
 
 def getGeohash(lat,lon, range):
     # good public and free api for encoding coordinates to geohash
