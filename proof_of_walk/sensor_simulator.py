@@ -40,8 +40,10 @@ choice = input("(m)Manual Input/(g)Geohash Sensor Simulator: ")
 if "m" in choice:
     while True:
         input_op = input("Input operations to sign: ")
+        input_op=input_op.strip()
         # get bytes of message
         msg = input_op.encode()
+        print("test: "+input_op)
         h = SHA256.new(msg)
         # # generate deterministic PSS signature
         signature = pss.new(keyPriv, salt_bytes=0).sign(h)
@@ -50,6 +52,7 @@ if "m" in choice:
         echoStr = "'" + keyPub + str("\\t") + signature_clean + str("\\t") + input_op + str("\\0") + "'"
         cmd = "echo " + echoStr + ">/tools/opentitanTFG/gpio0-write"
         os.system(cmd)
+        print(cmd)
         log.success("Message sent to device")
 elif "g" in choice:
     if len(sys.argv) != 2:
