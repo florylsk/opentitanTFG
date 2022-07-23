@@ -46,7 +46,7 @@ if "m" in choice:
         # # generate deterministic PSS signature
         signature = pss.new(keyPriv, salt_bytes=0).sign(h)
         signature_clean = hex(int.from_bytes(signature, byteorder='big'))[2:]
-        print("Signature: " + signature_clean)
+        log.info("Signature: " + signature_clean)
         echoStr = "'" + keyPub + str("\\t") + signature_clean + str("\\t") + input_op + str("\\0") + "'"
         cmd = "echo " + echoStr + ">/tools/opentitanTFG/gpio0-write"
         os.system(cmd)
