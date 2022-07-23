@@ -52,7 +52,7 @@ if "m" in choice:
         echoStr = "'" + keyPub + str("\\t") + signature_clean + str("\\t") + input_op + str("\\0") + "'"
         cmd = "echo " + echoStr + ">/tools/opentitanTFG/gpio0-write"
         os.system(cmd)
-        print(cmd)
+        log.info("Command to execute: "+cmd)
         log.success("Message sent to device")
 elif "g" in choice:
     if len(sys.argv) != 2:
