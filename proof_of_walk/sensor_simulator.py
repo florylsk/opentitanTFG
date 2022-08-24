@@ -124,7 +124,7 @@ elif "g" in choice:
         echoStr = "'" + keyPub + str("\\t") + signature_clean + str("\\t") + payload + str("\\0") + "'"
         cmd = "echo " + echoStr + ">/tools/opentitanTFG/gpio0-write"
         os.system(cmd)
-        # dont wan't to abuse the free api so keep this relatively high
+        # do not want to abuse the free api so keep this relatively high
         time.sleep(0.5)
 
     #send 16 zeroes to signal end of sensor simulation

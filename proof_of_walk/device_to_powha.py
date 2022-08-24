@@ -97,7 +97,7 @@ tmpCsvFileName="coordinates/coords_"+str(random.randint(0,9))+".csv"
 with open(tmpCsvFileName,"w") as f:
     write=csv.writer(f)
     write.writerows(coordinates)
-log.info("Successfully written the CSV file with the path's real coordinates")
+log.info("Successfully written the CSV file with the path's real coordinates to "+tmpCsvFileName)
 
 #generate geohashes from coordinates
 cmdGenerateGeohash=("python3 geohash_generator.py "+tmpCsvFileName)
