@@ -76,3 +76,10 @@ so use tmux, konsole, etc to split the screen.
   the pipe) in TTY3
 * cd into `proof_of_walk` and Execute `sensor_simulator.py test.csv`, changing test.csv for your path data, and
   select Geohash Sensor Simulator in TTY4
+  
+  ## IoT PoC
+  
+
+https://user-images.githubusercontent.com/46110263/186500849-b0d3b6c8-a20d-46ce-8ba8-13a84bee7611.mp4
+
+
