@@ -1,3 +1,6 @@
+# Copyright 2022
+# Florinel Olteanu
+
 import sys
 import os
 from Crypto.PublicKey import RSA
